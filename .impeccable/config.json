@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "Index.html"
+        ],
+        "createdAt": "2026-11-07T14:20:33.059Z",
+        "reason": "User confirmed: approved the Ehsan navy, gold, and light ivory identity inspired by the supplied Instagram references; retain the intentional background."
+      }
+    ]
+  }
+}

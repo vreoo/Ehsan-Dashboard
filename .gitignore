@@ -1,0 +1,18 @@
+.DS_Store
+node_modules/
+coverage/
+*.log
+
+# Local tooling state
+.omx/
+.impeccable/hook.cache.json
+
+# Local environment and Apps Script credentials / project binding
+.env
+.env.*
+!.env.example
+.clasp.json
+.clasprc.json
+credentials*.json
+*.pem
+*.key

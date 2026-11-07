@@ -1,0 +1,25 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run server and frontend tests
+        run: node --test tests/*.test.cjs
+      - name: Verify installation copies match source
+        run: |
+          cmp Code.gs install/Code.txt
+          cmp Index.html install/Index.txt

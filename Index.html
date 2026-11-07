@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>مركز إحسان</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --n: #2c345c;
+      --g: #cfad64;
+      --p: #fffefa;
+      --bg: #f7f5ef;
+      --ink: #293155;
+      --muted: #626878;
+      --line: #e5e3db;
+      --soft: #f1eee5;
+      --red: #a02b32;
+      --ok: #2d7657;
+      --control: #8a8e9d
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.8 'Noto Sans Arabic', Tahoma, sans-serif
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+      color: inherit
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--p);
+      padding: 8px 15px
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--n);
+      outline-offset: 3px
+    }
+
+    .primary {
+      background: var(--n);
+      border-color: var(--n);
+      color: #fff
+    }
+
+    .danger {
+      color: var(--red)
+    }
+
+    .muted {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .error {
+      font-size: 13px;
+      color: var(--red)
+    }
+
+    .success {
+      font-size: 13px;
+      color: var(--ok)
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    .login {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px
+    }
+
+    .login-box,
+    .panel {
+      background: var(--p);
+      border: 1px solid var(--line);
+      border-radius: 14px
+    }
+
+    .login-box {
+      width: min(420px, 100%);
+      padding: 30px
+    }
+
+    .brand {
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--n)
+    }
+
+    .gold {
+      height: 3px;
+      background: var(--g);
+      border-radius: 4px;
+      margin: 10px 0 25px
+    }
+
+    .field {
+      display: grid;
+      gap: 4px;
+      margin: 12px 0
+    }
+
+    .field>label,
+    .field>span:first-child {
+      font-size: 13px
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 7px
+    }
+
+    .field textarea {
+      min-height: 80px
+    }
+
+    .login-box button {
+      width: 100%;
+      margin-top: 10px
+    }
+
+    .app {
+      min-height: 100vh
+    }
+
+    .top {
+      background: var(--n);
+      color: #fff;
+      border-bottom: 3px solid var(--g);
+      padding: 16px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px
+    }
+
+    .top .sub {
+      color: #ead59f;
+      font-size: 12px
+    }
+
+    .user {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px
+    }
+
+    .user button {
+      background: transparent;
+      color: #fff;
+      border-color: #777c9c;
+      padding: 4px 10px
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: calc(100vh - 82px)
+    }
+
+    .side {
+      background: var(--p);
+      border-inline-end: 1px solid var(--line);
+      padding: 15px
+    }
+
+    .side button {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      text-align: start;
+      color: var(--muted);
+      margin: 3px 0
+    }
+
+    .side button.active {
+      background: var(--soft);
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    .main {
+      max-width: 1380px;
+      width: 100%;
+      padding: 26px;
+      margin-inline: auto;
+      margin-block: 0;
+      align-self: start
+    }
+
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .head h1,
+    .head h2,
+    .head h3 {
+      margin: 0
+    }
+
+    .head h1 {
+      font-size: 23px
+    }
+
+    .actions,
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .toolbar {
+      margin: 18px 0
+    }
+
+    .toolbar input,
+    .toolbar select {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: var(--p);
+      border-radius: 7px;
+      min-width: 145px
+    }
+
+    .panel {
+      padding: 19px;
+      margin-top: 16px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .table {
+      overflow: auto;
+      margin-top: 14px
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: start;
+      white-space: nowrap
+    }
+
+    th,
+    td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    th {
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500
+    }
+
+    .link {
+      padding: 0;
+      background: transparent;
+      border: 0;
+      color: var(--n);
+      text-decoration: underline
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px
+    }
+
+    .badge {
+      background: var(--soft);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 12px
+    }
+
+    .type {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 120px 68px;
+      gap: 8px;
+      align-items: end;
+      margin: 9px 0
+    }
+
+    .type input {
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--p)
+    }
+
+    .score {
+      font-size: 31px;
+      font-weight: 600
+    }
+
+    .bar {
+      height: 5px;
+      width: 130px;
+      background: var(--soft);
+      border-radius: 5px;
+      overflow: hidden
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: var(--g)
+    }
+
+    .notice {
+      background: var(--soft);
+      padding: 10px 13px;
+      border-radius: 7px;
+      font-size: 13px;
+      margin: 12px 0
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: #20264044;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      z-index: 5
+    }
+
+    .dialog {
+      background: var(--p);
+      width: min(520px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid var(--line)
+    }
+
+    @media(max-width:850px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .side {
+        display: flex;
+        overflow: auto;
+        border-inline-end: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 8px
+      }
+
+      .side button {
+        width: auto;
+        white-space: nowrap
+      }
+
+      .main {
+        padding: 17px
+      }
+    }
+
+    @media(max-width:560px) {
+
+      .grid,
+      .grid.two {
+        grid-template-columns: 1fr
+      }
+
+      .main {
+        padding: 12px
+      }
+
+      .optional {
+        display: none
+      }
+
+      .top {
+        padding: 13px 15px
+      }
+
+      .type {
+        grid-template-columns: 1fr 75px 55px
+      }
+    }
+
+    @media print {
+
+      .top,
+      .side,
+      .toolbar,
+      .actions,
+      .no-print {
+        display: none !important
+      }
+
+      .layout {
+        display: block
+      }
+
+      .main {
+        padding: 0
+      }
+
+      .panel {
+        border: 0
+      }
+    }
+
+    .main {
+      min-width: 0
+    }
+
+    .panel {
+      overflow-x: auto
+    }
+
+    .dialog table {
+      font-size: 13px
+    }
+
+    .user {
+      flex-wrap: wrap
+    }
+
+    .user select {
+      max-width: 220px;
+      background: #fffefa;
+      color: #293155;
+      border: 0;
+      border-radius: 6px;
+      padding: 5px
+    }
+
+    .toolbar label {
+      display: grid;
+      gap: 3px;
+      font-size: 13px
+    }
+
+    .dialog .error {
+      white-space: normal
+    }
+
+    input {
+      caret-color: var(--n)
+    }
+
+    ::selection {
+      background: #e7d5a9;
+      color: #293155
+    }
+
+    @media(pointer:coarse) {
+
+      button,
+      input,
+      select {
+        min-height: 44px
+      }
+    }
+
+    @media(max-width:560px) {
+      .top {
+        align-items: flex-start;
+        flex-direction: column
+      }
+
+      .user select {
+        max-width: 180px
+      }
+    }
+
+    /* Keep extreme content inside its own surface, including at 200% zoom. */
+    .layout {
+      grid-template-columns: 220px minmax(0, 1fr)
+    }
+
+    .head>*,
+    .grid>*,
+    .type>*,
+    .toolbar>*,
+    .user>* {
+      min-width: 0
+    }
+
+    .head h1,
+    .head h2,
+    .head h3,
+    .notice,
+    .global-message,
+    .error,
+    #userName {
+      overflow-wrap: anywhere
+    }
+
+    .toolbar input,
+    .toolbar select,
+    .field input,
+    .field select {
+      max-width: 100%
+    }
+
+    .user select {
+      min-width: 0;
+      width: min(220px, 100%)
+    }
+
+    .panel table,
+    .dialog table {
+      table-layout: auto
+    }
+
+    td {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      max-width: 32ch;
+      min-width: 6ch
+    }
+
+    button {
+      overflow-wrap: anywhere
+    }
+
+    .side button {
+      overflow-wrap: normal
+    }
+
+    .dialog {
+      min-width: 0;
+      max-height: 90dvh;
+      overscroll-behavior: contain
+    }
+
+    .modal-open {
+      overflow: hidden
+    }
+
+    .request-status {
+      position: fixed;
+      inset-block-end: 12px;
+      inset-inline: 12px;
+      margin: 0 auto;
+      width: fit-content;
+      max-width: calc(100% - 24px);
+      padding: 8px 14px;
+      background: var(--n);
+      color: #fff;
+      border-radius: 8px;
+      z-index: 6
+    }
+
+    .request-status:empty {
+      display: none
+    }
+
+    @media(max-width:850px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr)
+      }
+    }
+
+    @media(max-width:560px) {
+
+      body,
+      input,
+      select,
+      textarea {
+        font-size: 16px
+      }
+
+      .toolbar>label {
+        flex: 1 1 145px
+      }
+
+      .toolbar input,
+      .toolbar select {
+        min-width: 0;
+        width: 100%
+      }
+
+      .dialog {
+        padding: 16px
+      }
+
+      .type {
+        grid-template-columns: minmax(0, 1fr) minmax(70px, .5fr)
+      }
+
+      .type>button {
+        grid-column: 1/-1;
+        justify-self: start
+      }
+    }
+
+    /* Shared finishing details for forms, navigation, and tabular work. */
+    :root {
+      scrollbar-color: var(--control) var(--soft)
+    }
+
+    input,
+    select,
+    textarea {
+      accent-color: var(--n);
+      caret-color: var(--n)
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--muted);
+      opacity: 1
+    }
+
+    .field input,
+    .field select,
+    .field textarea,
+    .toolbar input,
+    .toolbar select,
+    .type input {
+      border-color: var(--control)
+    }
+
+    .field input:disabled,
+    .field select:disabled,
+    .field textarea:disabled {
+      background: var(--soft);
+      color: var(--muted);
+      opacity: 1
+    }
+
+    .top :focus-visible {
+      outline-color: var(--g)
+    }
+
+    a,
+    .link {
+      text-underline-offset: .2em;
+      text-decoration-thickness: 1px
+    }
+
+    button:not(:disabled):active {
+      background: var(--soft)
+    }
+
+    button.primary:not(:disabled):active {
+      background: var(--ink)
+    }
+
+    .side button.active,
+    .toolbar button[aria-pressed="true"] {
+      background: var(--soft);
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    .head>div>p {
+      margin: 4px 0 0
+    }
+
+    .dialog>.head {
+      padding-block-end: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-block-end: 16px
+    }
+
+    .dialog h2,
+    .subpanel h2 {
+      font-size: 20px;
+      line-height: 1.6
+    }
+
+    .dialog h3 {
+      margin-block: 24px 8px
+    }
+
+    .dialog .grid {
+      margin-block: 12px 16px;
+      align-items: start
+    }
+
+    .grid>.field,
+    .type>.field {
+      margin: 0
+    }
+
+    .type {
+      align-items: end;
+      margin-block: 16px
+    }
+
+    .error:empty,
+    .global-message:empty {
+      display: none
+    }
+
+    .dialog form>.primary {
+      margin-block-start: 16px
+    }
+
+    .dialog .actions {
+      margin-block-start: 20px
+    }
+
+    .subpanel>.head {
+      margin-block: 8px 16px
+    }
+
+    .subpanel table {
+      margin-block-end: 16px
+    }
+
+    td {
+      vertical-align: middle;
+      font-variant-numeric: tabular-nums
+    }
+
+    td>button+button {
+      margin-inline-start: 6px
+    }
+
+    .empty {
+      white-space: normal
+    }
+
+    @media(hover:hover) {
+      button:not(:disabled):hover {
+        background: var(--soft);
+        border-color: var(--control)
+      }
+
+      button.primary:not(:disabled):hover {
+        background: var(--ink);
+        border-color: var(--ink)
+      }
+
+      .user button:not(:disabled):hover {
+        background: #ffffff1a;
+        border-color: var(--g)
+      }
+
+      .link:not(:disabled):hover {
+        background: transparent;
+        text-decoration-thickness: 2px
+      }
+
+      tbody tr:has(button):hover {
+        background: var(--bg)
+      }
+    }
+
+    @media(max-width:850px) {
+      .side {
+        gap: 4px
+      }
+
+      .side button {
+        flex-shrink: 0
+      }
+    }
+
+    @media(forced-colors:active) {
+
+      .side button.active,
+      .toolbar button[aria-pressed="true"] {
+        outline: 2px solid Highlight;
+        outline-offset: -2px
+      }
+    }
+
+    @media print {
+      .layout {
+        display: block
+      }
+
+      .request-status {
+        display: none
+      }
+
+      .panel {
+        overflow: visible
+      }
+
+      td {
+        max-width: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section id="login" class="login">
+    <form id="loginForm" class="login-box">
+      <div class="brand">مركز إحسان</div>
+      <div class="muted">لوحة المشرفين · الجابرية</div>
+      <div class="gold"></div><label class="field">اسم المستخدم<input id="username" autocomplete="username"
+          required></label><label class="field">كلمة المرور<input id="password" type="password"
+          autocomplete="current-password" required></label><button class="primary" type="submit">دخول</button>
+      <p id="loginMsg" class="error" role="alert"></p>
+    </form>
+  </section>
+  <section id="app" class="app hidden">
+    <header class="top">
+      <div>
+        <div class="brand" style="color:#fff">مركز إحسان</div>
+        <div class="sub">لوحة المشرفين · الجابرية، الكويت</div>
+      </div>
+      <div class="user"><span id="userName"></span><select id="seasonSelect" aria-label="الموسم"></select><button
+          id="refresh">تحديث</button><button id="logout">خروج</button></div>
+    </header>
+    <div class="layout">
+      <aside class="side"><button data-view="students" class="active">الطلاب</button><button
+          data-view="attendance">الحضور</button><button data-view="reports">التقارير</button><button
+          data-view="settings">الإعدادات</button></aside>
+      <main id="main" class="main"></main>
+    </div>
+  </section>
+  <p id="requestStatus" class="request-status" role="status" aria-live="polite"></p>
+  <script>
+    (() => {
+      const storage = { get() { try { return sessionStorage.getItem('ehsanToken') || ''; } catch { return ''; } }, set(token) { try { if (token) sessionStorage.setItem('ehsanToken', token); else sessionStorage.removeItem('ehsanToken'); } catch { } } }; const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)], S = { token: storage.get(), user: null, data: null, view: 'students', seasonId: null, dirty: false, busy: false }; const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); const ar = v => Number(v || 0).toLocaleString('ar-KW', { maximumFractionDigits: 1 }); const d = v => v ? new Date(v + 'T12:00:00').toLocaleDateString('ar-KW', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'; const today = () => S.data?.today || new Date().toISOString().slice(0, 10); const season = () => S.data?.seasons?.find(x => x.id === S.seasonId) || S.data?.seasons?.find(x => x.status === 'active') || S.data?.seasons?.[0]; const gname = id => S.data?.groups?.find(x => x.id === id)?.name || '—'; const tname = (se, id) => se?.types?.find(x => x.id === id)?.name || '—'; const statusMap = { active: 'نشط', closed: 'مغلق', draft: 'مسودة', approved: 'معتمد', cancelled: 'ملغى' }; const attMap = { present: 'حاضر', absent: 'غائب', excused: 'بعذر', '': 'لم يسجل' };
+
+      const disabledBefore = new WeakMap();
+      function setBusy(on) {
+        if (S.busy === on) return;
+        S.busy = on;
+        $('#app').setAttribute('aria-busy', String(on));
+        $('#loginForm').setAttribute('aria-busy', String(on));
+        $('#requestStatus').textContent = on ? 'جارٍ تنفيذ الطلب…' : '';
+        $$('button,input,select,textarea').forEach(el => {
+          if (on) { disabledBefore.set(el, el.disabled); el.disabled = true; }
+          else if (disabledBefore.has(el)) { el.disabled = disabledBefore.get(el); disabledBefore.delete(el); }
+        });
+      }
+      let editorOpener = null;
+      function closeEditors() {
+        $$('.overlay').forEach(el => el.remove()); S.dirty = false;
+        $('#app').inert = false; $('#login').inert = false; document.body.classList.remove('modal-open');
+        const opener = editorOpener; editorOpener = null; if (opener?.isConnected !== false) opener?.focus();
+      }
+      function localLogout(message) {
+        storage.set(''); S.token = ''; S.user = null; S.data = null; closeEditors();
+        $('#password').value = ''; $('#app').classList.add('hidden'); $('#login').classList.remove('hidden');
+        $('#loginMsg').textContent = message || '';
+      }
+      function msg(text, ok = false) {
+        const target = $('.dialog') || $('#main'); let p = target.querySelector('.global-message');
+        if (!p) { p = document.createElement('p'); p.className = 'global-message'; p.setAttribute('aria-live', 'polite'); target.append(p); }
+        p.className = 'global-message ' + (ok ? 'success' : 'error'); p.textContent = text;
+      }
+      function call(action, payload, done, fail) {
+        if (S.busy) return; setBusy(true);
+        const failed = error => {
+          setBusy(false); const text = (error?.message || 'تعذرت العملية. حاول مرة أخرى.').replace(/^Error:\s*/, '');
+          if (action !== 'login' && text.includes('جلسة')) { localLogout('انتهت الجلسة. سجّل الدخول مجددًا.'); return; }
+          if (fail) fail(text); else msg(text);
+        };
+        let request;
+        try {
+          request = google.script.run.withSuccessHandler(result => { setBusy(false); done(result); }).withFailureHandler(failed);
+        } catch { failed({ message: 'تعذر الاتصال بالخدمة. تحقق من الاتصال ثم حاول مجددًا.' }); return; }
+        try { request.api(action, JSON.parse(JSON.stringify(payload || {})), action === 'login' ? '' : S.token); }
+        catch { failed({ message: 'تعذر إكمال الطلب. تحقق من الاتصال ثم حاول مجددًا. إذا كنت تحفظ بيانات، حدّثها أولًا للتحقق من نتيجة الحفظ.' }); }
+      }
+      function mutate(action, payload, message) {
+        call(action, payload, result => {
+          const ownCredentials = action === 'saveUser' && payload.id === S.user.id && (payload.password || payload.username !== S.user.username);
+          S.data = result; S.user = result.user; closeEditors();
+          if (ownCredentials) { localLogout('تم تحديث حسابك. سجّل الدخول ببياناتك الجديدة.'); return; }
+          if (action === 'saveSeason' && !payload.id) S.seasonId = result.seasons.at(-1)?.id;
+          if (!S.seasonId || !result.seasons.some(x => x.id === S.seasonId)) S.seasonId = season()?.id;
+          render(); if (message) msg(message, true);
+        });
+      }
+      function guard() { return !S.dirty || confirm('لديك تغييرات غير محفوظة. هل تريد المتابعة دون حفظ؟'); }
+      function eligible(student, day, groupId) {
+        if (Array.isArray(student.enrollments)) return student.enrollments.some(e => e.groupId === groupId && e.from <= day && (!e.to || day <= e.to));
+        return student.active && student.groupId === groupId && student.joinedOn <= day;
+      }
+      function time(value) { return value ? new Date(value).toLocaleString('ar-KW', { timeZone: 'Asia/Kuwait', dateStyle: 'short', timeStyle: 'short' }) : '—'; }
+
+      function options(arr, value, empty) { const s = document.createElement('select'); if (empty) { const o = document.createElement('option'); o.value = ''; o.textContent = empty; s.append(o) } arr.forEach(x => { const o = document.createElement('option'); o.value = x.value; o.textContent = x.label; o.selected = x.value === value; s.append(o) }); return s } function rowEmpty(n, text) { const tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = n; td.className = 'empty'; td.textContent = text; tr.append(td); return tr } let fieldId = 0;
+      function field(label, value, type = 'text', required = false) { const l = document.createElement('label'); l.className = 'field'; l.append(cell(label)); const i = document.createElement('input'); i.type = type; i.value = value ?? ''; i.required = required; l.append(i); const e = document.createElement('span'); e.className = 'error'; e.id = 'field-error-' + (++fieldId); e.setAttribute('aria-live', 'polite'); i.setAttribute('aria-describedby', e.id); l.append(e); i.oninput = () => S.dirty = true; return { l, i, e } } function cell(t) { const s = document.createElement('span'); s.textContent = t; return s }
+      function setShell(title, sub) { $('#main').innerHTML = `<div class="head"><div><h1>${esc(title)}</h1><p class="muted">${esc(sub)}</p></div><div id="actions" class="actions"></div></div>`; return $('#actions') }
+      function render() {
+        if (!S.data) return;
+        $('#userName').textContent = S.user?.name || '';
+        const select = $('#seasonSelect'), seasons = S.data.seasons || [];
+        if (!seasons.some(item => item.id === S.seasonId)) S.seasonId = season()?.id || null;
+        select.replaceChildren(); select.disabled = !seasons.length;
+        if (!seasons.length) {
+          const option = document.createElement('option'); option.value = ''; option.textContent = 'لا يوجد موسم'; select.append(option);
+        } else seasons.forEach(item => {
+          const option = document.createElement('option'); option.value = item.id;
+          option.textContent = item.name + ' · ' + statusMap[item.status]; option.selected = item.id === S.seasonId; select.append(option);
+        });
+        $$('[data-view]').forEach(button => { const active = button.dataset.view === S.view; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); });
+        if (S.view === 'students') students(); if (S.view === 'attendance') attendance();
+        if (S.view === 'reports') reports(); if (S.view === 'settings') settings();
+      }
+
+      const searchKey = value => String(value ?? '').replace(/ی/g, 'ي').replace(/ک/g, 'ك').toLocaleLowerCase('ar-KW');
+      function students() { const a = setShell('الطلاب', 'إدارة الطلاب وملفاتهم'); const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة طالب'; add.onclick = () => studentDialog(); a.append(add); const bar = document.createElement('div'); bar.className = 'toolbar'; const search = document.createElement('input'); search.type = 'search'; search.setAttribute('aria-label', 'ابحث باسم الطالب'); search.placeholder = 'ابحث باسم الطالب'; const gs = options((S.data.groups || []).map(x => ({ value: x.id, label: x.name })), '', 'كل الفئات'); gs.setAttribute('aria-label', 'الفئة'); bar.append(search, gs); $('#main').append(bar); const p = document.createElement('section'); p.className = 'panel'; const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الطالب</th><th>الفئة</th><th>الهاتف</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); const draw = () => { b.replaceChildren(); const q = search.value.trim(); (S.data.students || []).filter(x => (!q || searchKey(x.name).includes(searchKey(q))) && (!gs.value || x.groupId === gs.value)).forEach(s => { const tr = document.createElement('tr'); const n = document.createElement('button'); n.className = 'link'; n.textContent = s.name; n.onclick = () => profile(s.id);[n, cell(gname(s.groupId)), cell(s.phone || '—'), cell(s.active ? 'نشط' : 'موقوف')].forEach(v => { const td = document.createElement('td'); td.append(v); tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => studentDialog(s); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(5, 'لا توجد نتائج')) }; t.append(b); p.append(t); $('#main').append(p); search.oninput = draw; gs.onchange = draw; draw() }
+
+      function overlay(title) {
+        if ($('.overlay')) { if (!guard()) return null; closeEditors(); }
+        if (S.busy) return null;
+        editorOpener = document.activeElement;
+        const node = document.createElement('div'); node.className = 'overlay';
+        const dialog = document.createElement('div'); dialog.className = 'dialog'; dialog.setAttribute('role', 'dialog'); dialog.setAttribute('aria-label', title); dialog.setAttribute('aria-modal', 'true');
+        dialog.innerHTML = '<div class="head"><h2>' + esc(title) + '</h2><button type="button" class="close">إغلاق</button></div>';
+        node.append(dialog); document.body.append(node);
+        const close = dialog.querySelector('.close');
+        close.onclick = () => { if (!S.busy && guard()) closeEditors(); };
+        dialog.addEventListener('keydown', event => {
+          if (event.key === 'Escape') { event.preventDefault(); if (!S.busy && guard()) closeEditors(); return; }
+          if (event.key !== 'Tab') return;
+          const controls = [...dialog.querySelectorAll('button,input,select,textarea,a')].filter(el => !el.disabled && el.type !== 'hidden');
+          const first = controls[0], last = controls.at(-1);
+          if (!first) { event.preventDefault(); dialog.focus(); return; }
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && (document.activeElement === last || document.activeElement === dialog)) { event.preventDefault(); first.focus(); }
+        });
+        dialog.tabIndex = -1; $('#app').inert = true; $('#login').inert = true;
+        document.body.classList.add('modal-open'); close.focus();
+        dialog.addEventListener('input', () => S.dirty = true); dialog.addEventListener('change', () => S.dirty = true);
+        return { overlay: node, dialog };
+      }
+
+
+      function studentDialog(student) {
+        const o = overlay(student ? 'تعديل طالب' : 'إضافة طالب'); if (!o) return;
+        const f = document.createElement('form'); f.noValidate = true;
+        const grid = document.createElement('div'); grid.className = 'grid two';
+        const name = field('الاسم', student?.name, 'text', true), joined = field('تاريخ الانتساب', student?.joinedOn || today(), 'date', true), phone = field('رقم الهاتف', student?.phone), notes = field('ملاحظات', student?.notes);
+        const groupLabel = document.createElement('label'); groupLabel.className = 'field'; groupLabel.append(cell('الفئة'));
+        const groups = S.data.groups.filter(g => g.active || g.id === student?.groupId), group = options(groups.map(g => ({ value: g.id, label: g.name })), student?.groupId || groups[0]?.id); groupLabel.append(group);
+        if (!groups.length) { const note = document.createElement('p'); note.className = 'notice'; note.textContent = 'لا توجد فئة نشطة. اطلب من مدير المركز إضافة فئة أو تفعيلها من الإعدادات.'; f.append(note); group.disabled = true; }
+        grid.append(name.l, groupLabel, joined.l, phone.l); f.append(grid, notes.l);
+        const active = document.createElement('label'), check = document.createElement('input'); check.type = 'checkbox'; check.checked = student?.active !== false; active.append(check, cell('طالب نشط')); f.append(active);
+        if (student) { const note = document.createElement('p'); note.className = 'muted'; note.textContent = 'نقل الفئة أو إيقاف الطالب يسري من اليوم، مع حفظ سجله السابق.'; f.append(note); }
+        const error = document.createElement('p'); error.className = 'error'; error.setAttribute('aria-live', 'polite'); f.append(error);
+        const save = document.createElement('button'); save.type = 'submit'; save.className = 'primary'; save.textContent = 'حفظ'; save.disabled = !groups.length; f.append(save); o.dialog.append(f);
+        f.onsubmit = event => {
+          event.preventDefault(); const payload = { id: student?.id, name: name.i.value.trim(), groupId: group.value, joinedOn: joined.i.value, phone: phone.i.value.trim(), notes: notes.i.value.trim(), active: check.checked };
+          name.e.textContent = payload.name ? '' : 'أدخل اسم الطالب.'; joined.e.textContent = payload.joinedOn ? '' : 'حدد تاريخ الانتساب.';
+          if (!payload.name || !payload.joinedOn || !payload.groupId) { error.textContent = 'أكمل الحقول المطلوبة.'; return; }
+          const saved = result => { S.data = result; closeEditors(); render(); msg('تم حفظ الطالب.', true); };
+          call('saveStudent', payload, saved, text => {
+            if (text.includes('DUPLICATE_STUDENT|')) {
+              const warning = text.split('DUPLICATE_STUDENT|').at(-1);
+              if (confirm(warning + '\nهل تريد الحفظ باعتباره طالبًا آخر؟')) call('saveStudent', { ...payload, allowDuplicate: true }, saved, text => error.textContent = text);
+              else error.textContent = warning;
+            } else error.textContent = text;
+          });
+        };
+      }
+
+      function profile(id) { const s = S.data.students.find(x => x.id === id), se = season(), sc = S.data.scores?.find(x => x.studentId === id && x.seasonId === se?.id), o = overlay('ملف الطالب'); if (!o) return; const top = document.createElement('div'); top.className = 'head'; top.innerHTML = '<div><h3>' + esc(s?.name || '—') + '</h3><p class="muted">' + esc(gname(s?.groupId)) + ' · ' + esc(se?.name || '') + '</p></div><div><div class="score">' + (sc?.value == null ? '—' : ar(sc.value)) + '</div><p class="muted">النتيجة من ١٠٠</p></div>'; o.dialog.append(top); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>نوع النشاط</th><th>الحضور</th><th>الوزن</th><th>النقاط</th></tr></thead>'; const b = document.createElement('tbody'); (sc?.breakdown || []).forEach(x => { const tr = document.createElement('tr');[x.name, x.total ? ar(x.present) + ' / ' + ar(x.total) : 'لا توجد لقاءات', ar(x.weight) + '٪', x.total ? ar(x.points) : '—'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(4, 'لا توجد نقاط بعد')); t.append(b); o.dialog.append(t); const log = document.createElement('table'); log.innerHTML = '<thead><tr><th>التاريخ</th><th>اللقاء</th><th>الحالة</th><th>المشرف</th></tr></thead>'; const lb = document.createElement('tbody'); (S.data.meetings || []).filter(m => m.seasonId === se?.id && m.roster?.includes(id)).sort((a, b) => b.date.localeCompare(a.date)).forEach(m => { const tr = document.createElement('tr');[d(m.date), m.name + ' · ' + statusMap[m.status], attMap[m.attendance?.[id]], (m.updatedBy || '—') + ' · ' + time(m.updatedAt)].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); lb.append(tr) }); if (!lb.children.length) lb.append(rowEmpty(4, 'لا يوجد سجل حضور')); log.append(lb); const heading = document.createElement('h3'); heading.textContent = 'سجل الحضور'; const note = document.createElement('p'); note.className = 'muted'; note.textContent = 'الغياب بعذر بلا نقاط. الأنواع دون لقاءات معتمدة مستبعدة من وزن النتيجة.'; o.dialog.append(note, heading, log) }
+      function attendance() { const a = setShell('الحضور', 'إنشاء اللقاءات واعتماد الحضور'); const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'لقاء جديد'; add.onclick = () => meetingDialog(); a.append(add); const p = document.createElement('section'); p.className = 'panel'; const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>اللقاء</th><th>التاريخ</th><th>النوع</th><th>الفئة</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.meetings || []).filter(m => m.seasonId === S.seasonId).sort((x, y) => y.date.localeCompare(x.date)).forEach(m => { const tr = document.createElement('tr');[m.name, d(m.date), tname(season(), m.typeId), gname(m.groupId), statusMap[m.status]].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'فتح'; e.onclick = () => meetingDialog(m); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(6, 'لا توجد لقاءات')); t.append(b); p.append(t); $('#main').append(p) }
+
+      function meetingDialog(meeting) {
+        const se = S.data.seasons.find(s => s.id === (meeting?.seasonId || S.seasonId));
+        if (!se) { msg('أنشئ موسمًا أولًا من الإعدادات.'); return; }
+        if (!meeting && se.status !== 'active') { msg('فعّل الموسم قبل إنشاء اللقاءات.'); return; }
+        const o = overlay(meeting ? 'سجل اللقاء' : 'لقاء جديد'); if (!o) return;
+        const readonly = meeting?.status === 'cancelled' || se.status !== 'active', fixed = meeting?.status === 'approved' || readonly;
+        const f = document.createElement('form'); f.noValidate = true;
+        const grid = document.createElement('div'); grid.className = 'grid';
+        const name = field('اسم اللقاء', meeting?.name, 'text', true), day = field('التاريخ', meeting?.date || today(), 'date', true);
+        const typeLabel = document.createElement('label'); typeLabel.className = 'field'; typeLabel.append(cell('نوع النشاط'));
+        const type = options(se.types.map(t => ({ value: t.id, label: t.name })), meeting?.typeId || se.types[0]?.id); typeLabel.append(type);
+        const groupLabel = document.createElement('label'); groupLabel.className = 'field'; groupLabel.append(cell('الفئة'));
+        const groups = S.data.groups.filter(g => g.active || g.id === meeting?.groupId), group = options(groups.map(g => ({ value: g.id, label: g.name })), meeting?.groupId || groups[0]?.id); groupLabel.append(group);
+        grid.append(name.l, day.l, typeLabel, groupLabel); f.append(grid);
+        name.i.disabled = readonly; day.i.disabled = type.disabled = group.disabled = fixed;
+        let roster = meeting?.roster ? [...meeting.roster] : S.data.students.filter(s => eligible(s, day.i.value, group.value)).map(s => s.id);
+        const attendance = { ...(meeting?.attendance || {}) };
+        const table = document.createElement('table'); table.innerHTML = '<thead><tr><th>الطالب</th><th>الحالة</th></tr></thead>'; const body = document.createElement('tbody'); table.append(body); f.append(table);
+        const draw = () => {
+          body.replaceChildren(); roster.forEach(id => {
+            const student = S.data.students.find(s => s.id === id); if (!student) return;
+            const row = document.createElement('tr'), a = document.createElement('td'), b = document.createElement('td'); a.textContent = student.name;
+            const control = options([{ value: '', label: 'لم يُسجّل' }, { value: 'present', label: 'حاضر' }, { value: 'absent', label: 'غائب' }, { value: 'excused', label: 'بعذر' }], attendance[id] || '');
+            control.setAttribute('aria-label', 'حالة ' + student.name); control.disabled = readonly; control.dataset.student = id; control.onchange = () => { attendance[id] = control.value; S.dirty = true; }; b.append(control); row.append(a, b); body.append(row);
+          }); if (!roster.length) body.append(rowEmpty(2, 'لا يوجد طلاب منتسبون لهذه الفئة في تاريخ اللقاء.'));
+        };
+        const rebuild = () => {
+          if (fixed) return; roster = S.data.students.filter(s => eligible(s, day.i.value, group.value)).map(s => s.id);
+          Object.keys(attendance).forEach(id => { if (!roster.includes(id)) delete attendance[id]; }); draw(); S.dirty = true;
+        };
+        group.onchange = rebuild; day.i.onchange = rebuild;
+        const all = document.createElement('button'); all.type = 'button'; all.textContent = 'تحديد الجميع حاضرًا'; all.disabled = readonly; all.onclick = () => { roster.forEach(id => attendance[id] = 'present'); draw(); S.dirty = true; }; f.append(all);
+        const error = document.createElement('p'); error.className = 'error'; error.setAttribute('aria-live', 'polite'); error.setAttribute('role', 'alert'); f.append(error);
+        const actions = document.createElement('div'); actions.className = 'actions';
+        const button = (text, status, primary) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = text; if (primary) b.className = 'primary'; b.onclick = () => { if (status !== 'cancelled' || confirm('إلغاء اللقاء يستبعده من النقاط ويبقي سجله محفوظًا. هل تريد المتابعة؟')) save(status); }; actions.append(b); };
+        if (!readonly) { if (meeting?.status !== 'approved') button('حفظ مسودة', 'draft'); button(meeting?.status === 'approved' ? 'حفظ التعديل' : 'اعتماد الحضور', 'approved', true); if (meeting) button('إلغاء اللقاء', 'cancelled'); }
+        f.append(actions); o.dialog.append(f); draw();
+        if (fixed) { const note = document.createElement('p'); note.className = 'notice'; note.textContent = readonly ? 'هذا السجل للعرض فقط.' : 'يمكن تعديل الحضور. لتصحيح التاريخ أو الفئة أو النوع ألغِ اللقاء وأنشئ بديلًا.'; o.dialog.append(note); }
+        function save(status) {
+          if (!name.i.value.trim() || !day.i.value) { error.textContent = 'اسم اللقاء والتاريخ مطلوبان.'; return; }
+          if (status === 'approved' && day.i.value > today()) { error.textContent = 'لا يمكن اعتماد لقاء مستقبلي.'; return; }
+          if (status === 'approved' && roster.some(id => !attendance[id])) { error.textContent = 'حدد حالة كل طالب قبل الاعتماد.'; return; }
+          mutate('saveMeeting', { id: meeting?.id, seasonId: se.id, name: name.i.value.trim(), typeId: type.value, groupId: group.value, date: day.i.value, status, attendance: Object.fromEntries(roster.map(id => [id, attendance[id] || ''])), revision: meeting?.revision }, 'تم حفظ اللقاء وتحديث النتائج.');
+        }
+      }
+
+
+      function reports() {
+        const actions = setShell('التقارير', season()?.name || 'اختر موسمًا');
+        const print = document.createElement('button'); print.textContent = 'طباعة'; print.onclick = () => window.print();
+        const exportButton = document.createElement('button'); exportButton.textContent = 'تصدير الجدول'; actions.append(print, exportButton);
+        const toolbar = document.createElement('div'); toolbar.className = 'toolbar';
+        const kind = options([{ value: 'scores', label: 'نتائج الطلاب' }, { value: 'absences', label: 'الغياب المتكرر' }, { value: 'log', label: 'سجل الحضور' }], S.reportKind || 'scores');
+        const group = options(S.data.groups.map(g => ({ value: g.id, label: g.name })), '', 'كل الفئات'), type = options((season()?.types || []).map(t => ({ value: t.id, label: t.name })), '', 'كل الأنواع'), search = document.createElement('input'); search.type = 'search'; search.placeholder = 'اسم الطالب';
+        const from = document.createElement('input'); from.type = 'date'; from.value = season()?.start || ''; const to = document.createElement('input'); to.type = 'date'; to.value = season()?.end || '';
+        const label = (text, control) => { const l = document.createElement('label'); l.append(cell(text), control); return l; };
+        toolbar.append(label('التقرير', kind), label('الفئة وقت اللقاء', group), label('نوع النشاط', type), label('الطالب', search), label('من', from), label('إلى', to)); $('#main').append(toolbar);
+        const panel = document.createElement('section'); panel.className = 'panel'; const note = document.createElement('p'); panel.append(note); const table = document.createElement('table'), head = document.createElement('thead'), body = document.createElement('tbody'); table.append(head, body); panel.append(table); $('#main').append(panel);
+        let output = [];
+        function draw() {
+          output = []; head.replaceChildren(); body.replaceChildren(); note.className = 'muted'; S.reportKind = kind.value;
+          if (from.value && to.value && from.value > to.value) { note.textContent = 'تاريخ البداية يجب أن يسبق النهاية.'; note.className = 'error'; exportButton.disabled = true; print.disabled = true; return; }
+          const se = season(), meetings = S.data.meetings.filter(m => m.seasonId === se?.id && m.status === 'approved' && m.date <= today() && (!from.value || m.date >= from.value) && (!to.value || m.date <= to.value) && (!group.value || m.groupId === group.value) && (!type.value || m.typeId === type.value));
+          const students = S.data.students.filter(s => (!search.value.trim() || searchKey(s.name).includes(searchKey(search.value.trim()))) && (!group.value || s.groupId === group.value || meetings.some(m => m.roster.includes(s.id))));
+          const count = (student, status) => meetings.filter(m => m.roster.includes(student.id) && m.attendance[student.id] === status).length;
+          let headers = [], rows = [];
+          if (kind.value === 'scores') {
+            headers = ['الطالب', 'الحضور', 'الغياب', 'بعذر', 'النتيجة من ١٠٠']; rows = students.map(s => [s.name, count(s, 'present'), count(s, 'absent'), count(s, 'excused'), score(s, se, meetings, type.value)]);
+            note.textContent = 'نتيجة الفترة المحددة. الغياب بعذر بلا نقاط؛ الأنواع دون لقاءات معتمدة مستبعدة.';
+          } else if (kind.value === 'absences') {
+            headers = ['الطالب', 'غائب', 'بعذر', 'إجمالي الغياب']; rows = students.map(s => [s.name, count(s, 'absent'), count(s, 'excused'), count(s, 'absent') + count(s, 'excused')]).filter(row => row[3] > 0).sort((a, b) => b[3] - a[3]); note.textContent = 'الأكثر غيابًا أولًا. الإجمالي يشمل الغياب بعذر.';
+          } else {
+            headers = ['الطالب', 'التاريخ', 'اللقاء', 'الحالة', 'المشرف', 'وقت التعديل']; rows = [...meetings].sort((a, b) => b.date.localeCompare(a.date)).flatMap(m => students.filter(s => m.roster.includes(s.id)).map(s => [s.name, d(m.date), m.name, attMap[m.attendance[s.id]] || 'لم يُسجّل', m.updatedBy || '—', time(m.updatedAt)])); note.textContent = 'الحضور المعتمد للطلاب المسجلين في اللقاء فقط.';
+          }
+          const heading = document.createElement('tr'); headers.forEach(text => { const th = document.createElement('th'); th.textContent = text; heading.append(th); }); head.append(heading);
+          rows.forEach(row => { const tr = document.createElement('tr'); row.forEach(value => { const td = document.createElement('td'); td.textContent = typeof value === 'number' ? ar(value) : value; tr.append(td); }); body.append(tr); }); if (!rows.length) body.append(rowEmpty(headers.length, 'لا توجد نتائج'));
+          output = [headers, ...rows]; exportButton.disabled = !rows.length; print.disabled = !rows.length;
+        }
+        [kind, group, type, search, from, to].forEach(control => { control.oninput = draw; control.onchange = draw; });
+        exportButton.onclick = () => {
+          if (output.length < 2) return;
+          const safe = value => { let text = String(value ?? ''); if (/^\s*[=+@-]/.test(text)) text = "'" + text; return '"' + text.replace(/"/g, '""') + '"'; };
+          const csv = '\ufeff' + output.map(row => row.map(safe).join(',')).join('\r\n'), url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })), link = document.createElement('a'); link.href = url; link.download = 'تقرير-إحسان.csv'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+        };
+        draw();
+      }
+
+      function score(st, se, ms, typeId) { const bs = (se?.types || []).filter(t => !typeId || t.id === typeId).map(t => { const e = ms.filter(m => m.status === 'approved' && m.typeId === t.id && m.roster?.includes(st.id) && m.date <= today()), p = e.filter(m => m.attendance?.[st.id] === 'present').length; return { t, e, p } }).filter(x => x.e.length); if (!bs.length) return '—'; const w = bs.reduce((n, x) => n + x.t.weight, 0); return ar(bs.reduce((n, x) => n + x.p / x.e.length * x.t.weight, 0) / w * 100) }
+      function settings() { const a = setShell('الإعدادات', 'المواسم والفئات وحسابات المشرفين'); const p = document.createElement('section'); p.className = 'panel'; const tabs = document.createElement('div'); tabs.className = 'toolbar';[['seasons', 'المواسم'], ['groups', 'الفئات'], ['users', 'المشرفون']].forEach(([k, l]) => { if (k === 'users' && S.user?.role !== 'admin') return; const b = document.createElement('button'); b.textContent = l; b.dataset.setting = k; b.onclick = () => settingsTab(p, k); tabs.append(b) }); p.append(tabs); $('#main').append(p); settingsTab(p, 'seasons'); if (S.user?.role === 'admin' && S.data.databaseUrl) { const link = document.createElement('a'); link.href = S.data.databaseUrl; link.target = '_blank'; link.rel = 'noopener'; link.textContent = 'فتح ملف البيانات'; link.className = 'muted'; p.append(link) } }
+      function settingsTab(p, k) { p.querySelectorAll('[data-setting]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.setting === k)));[...p.querySelectorAll('.subpanel')].forEach(x => x.remove()); const box = document.createElement('div'); box.className = 'subpanel'; p.append(box); if (k === 'seasons') seasonPanel(box); if (k === 'groups') groupPanel(box); if (k === 'users') userPanel(box) }
+      function seasonPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>المواسم</h2>'; if (S.user?.role === 'admin') { const b = document.createElement('button'); b.className = 'primary'; b.textContent = 'موسم جديد'; b.onclick = () => seasonDialog(); h.append(b) } box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الموسم</th><th>الفترة</th><th>الحالة</th><th>الإجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.seasons || []).forEach(x => { const tr = document.createElement('tr');[x.name, d(x.start) + ' — ' + d(x.end), statusMap[x.status]].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'); const open = document.createElement('button'); open.textContent = x.status === 'draft' ? 'تعديل' : 'عرض'; open.onclick = () => seasonDialog(x); td.append(open); if (S.user?.role === 'admin' && x.status === 'draft') { const ac = document.createElement('button'); ac.textContent = 'تفعيل'; ac.onclick = () => mutate('activateSeason', { id: x.id }, 'تم تفعيل الموسم.'); td.append(ac) } if (S.user?.role === 'admin' && x.status === 'active') { const re = document.createElement('button'); re.textContent = 'إعادة فتح'; re.onclick = () => { if (confirm('إعادة فتح الموسم تسمح بتعديل الأوزان وإعادة حساب النتائج. هل تريد المتابعة؟')) mutate('reopenSeason', { id: x.id }, 'تمت إعادة فتح الموسم.'); }; td.append(re); const cl = document.createElement('button'); cl.textContent = 'إغلاق'; cl.onclick = () => { if (confirm('إغلاق الموسم يمنع تعديل حضوره حتى يعيد المدير فتحه. هل تريد المتابعة؟')) mutate('closeSeason', { id: x.id }, 'تم إغلاق الموسم.'); }; td.append(cl) } if (S.user?.role === 'admin' && x.status === 'closed') { const re = document.createElement('button'); re.textContent = 'إعادة فتح'; re.onclick = () => { if (confirm('إعادة فتح الموسم تسمح بتعديل الأوزان وإعادة حساب النتائج. هل تريد المتابعة؟')) mutate('reopenSeason', { id: x.id }, 'تمت إعادة فتح الموسم.'); }; td.append(re) } tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(4, 'لا توجد مواسم')); t.append(b); box.append(t) }
+
+      function seasonDialog(current) {
+        if (!current && S.user.role !== 'admin') { msg('إعداد المواسم لمدير المركز فقط.'); return; }
+        const editable = S.user.role === 'admin' && (!current || current.status === 'draft'), o = overlay(current ? (editable ? 'تعديل الموسم' : 'تفاصيل الموسم') : 'إنشاء موسم'); if (!o) return;
+        const form = document.createElement('form'); form.noValidate = true;
+        const grid = document.createElement('div'); grid.className = 'grid'; const name = field('اسم الموسم', current?.name, 'text', true), start = field('البداية', current?.start, 'date', true), end = field('النهاية', current?.end, 'date', true); grid.append(name.l, start.l, end.l); form.append(grid);[name.i, start.i, end.i].forEach(input => input.disabled = !editable);
+        if (!editable) { const notice = document.createElement('p'); notice.className = 'notice'; notice.textContent = 'للعرض فقط. يستطيع المدير إعادة فتح الموسم للإعداد لتعديل الأوزان ثم تفعيله مجددًا.'; form.append(notice); }
+        let list = (current?.types || []).map(type => ({ ...type })); const container = document.createElement('div'), total = document.createElement('p'); total.className = 'muted';
+        const sum = () => total.textContent = 'المجموع: ' + ar(list.reduce((sum, type) => sum + (Number(type.weight) || 0), 0)) + ' / ١٠٠';
+        function draw() {
+          container.replaceChildren(); list.forEach((type, index) => {
+            const row = document.createElement('div'); row.className = 'type'; const n = field('نوع النشاط', type.name), w = field('الوزن', type.weight, 'number'); w.i.min = '0.1'; w.i.max = '100'; w.i.step = '0.1'; n.i.disabled = w.i.disabled = !editable;
+            n.i.oninput = () => { type.name = n.i.value; S.dirty = true; }; w.i.oninput = () => { type.weight = Number(w.i.value); sum(); S.dirty = true; }; row.append(n.l, w.l);
+            if (editable) { const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'حذف'; remove.disabled = S.data.meetings.some(m => m.seasonId === current?.id && m.typeId === type.id); remove.onclick = () => { list.splice(index, 1); S.dirty = true; draw(); }; row.append(remove); }
+            container.append(row);
+          }); sum();
+        }
+        if (!current && editable) {
+          const label = document.createElement('label'); label.className = 'field'; label.append(cell('نسخ أوزان موسم سابق (اختياري)')); const copy = options(S.data.seasons.map(s => ({ value: s.id, label: s.name })), '', 'بدون نسخ'); label.append(copy); form.append(label);
+          copy.onchange = () => { const previous = S.data.seasons.find(s => s.id === copy.value); list = previous ? previous.types.map(t => ({ name: t.name, weight: t.weight })) : []; S.dirty = true; draw(); };
+        }
+        form.append(container, total);
+        if (editable) { const add = document.createElement('button'); add.type = 'button'; add.textContent = 'إضافة نوع نشاط'; add.onclick = () => { if (list.length >= 40) { msg('الحد الأقصى ٤٠ نوعًا.'); return; } list.push({ name: '', weight: 0 }); S.dirty = true; draw(); }; form.append(add); }
+        const error = document.createElement('p'); error.className = 'error'; error.setAttribute('aria-live', 'polite'); form.append(error);
+        if (editable) { const save = document.createElement('button'); save.type = 'submit'; save.className = 'primary'; save.textContent = 'حفظ المسودة'; form.append(save); }
+        o.dialog.append(form); draw();
+        form.onsubmit = event => {
+          event.preventDefault(); if (!editable) return;
+          const payload = { id: current?.id, name: name.i.value.trim(), start: start.i.value, end: end.i.value, types: list.map(t => ({ id: t.id, name: t.name.trim(), weight: Number(t.weight) })) };
+          if (!payload.name || !payload.start || !payload.end || payload.end <= payload.start) { error.textContent = 'اسم الموسم والتاريخان مطلوبان، والنهاية بعد البداية.'; return; }
+          if (!list.length || payload.types.some(t => !t.name || !Number.isFinite(t.weight) || t.weight <= 0 || t.weight > 100)) { error.textContent = 'أدخل اسمًا ووزنًا أكبر من صفر وحتى ١٠٠ لكل نوع.'; return; }
+          if (new Set(payload.types.map(t => t.name.toLowerCase())).size !== list.length) { error.textContent = 'اسم نوع النشاط مكرر.'; return; }
+          mutate('saveSeason', payload, 'تم حفظ المسودة. فعّل الموسم عندما يصبح مجموع الأوزان ١٠٠.');
+        };
+      }
+
+      function groupPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>الفئات</h2>'; const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة فئة'; add.onclick = () => groupDialog(); if (S.user.role === 'admin') h.append(add); box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الفئة</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.groups || []).forEach(g => { const tr = document.createElement('tr');[g.name, g.active ? 'نشطة' : 'موقوفة'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => groupDialog(g); if (S.user.role === 'admin') td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(3, 'لا توجد فئات')); t.append(b); box.append(t) } function groupDialog(g) { if (S.user.role !== 'admin') return; const o = overlay(g ? 'تعديل فئة' : 'إضافة فئة'); if (!o) return; const f = document.createElement('form'), n = field('اسم الفئة', g?.name, 'text', true), lab = document.createElement('label'), cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = g?.active !== false; lab.append(cb, cell('فئة نشطة')); f.append(n.l, lab); const er = document.createElement('p'); er.className = 'error'; er.setAttribute('aria-live', 'polite'); f.append(er); const save = document.createElement('button'); save.className = 'primary'; save.textContent = 'حفظ'; save.type = 'submit'; f.append(save); o.dialog.append(f); f.onsubmit = e => { e.preventDefault(); if (!n.i.value.trim()) { er.textContent = 'اسم الفئة مطلوب.'; return } mutate('saveGroup', { id: g?.id, name: n.i.value.trim(), active: cb.checked }, 'تم حفظ الفئة.') } }
+      function userPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>المشرفون</h2>'; const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة مشرف'; add.onclick = () => userDialog(); h.append(add); box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الاسم</th><th>المستخدم</th><th>الصلاحية</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.users || []).forEach(u => { const tr = document.createElement('tr');[u.name, u.username, u.role === 'admin' ? 'مدير' : 'مشرف', u.active ? 'نشط' : 'موقوف'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => userDialog(u); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(5, 'لا يوجد مشرفون')); t.append(b); box.append(t) } function userDialog(u) { if (S.user.role !== 'admin') return; const o = overlay(u ? 'تعديل مشرف' : 'إضافة مشرف'); if (!o) return; const f = document.createElement('form'), un = field('اسم المستخدم', u?.username, 'text', true), n = field('الاسم', u?.name, 'text', true), pw = field('كلمة المرور', '', 'password', !u), role = document.createElement('label'), rs = options([{ value: 'staff', label: 'مشرف' }, { value: 'admin', label: 'مدير' }], u?.role || 'staff'); role.className = 'field'; role.append(cell('الصلاحية'), rs); const active = document.createElement('label'), cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = u?.active !== false; active.append(cb, cell('حساب نشط')); f.append(un.l, n.l, pw.l, role, active); const er = document.createElement('p'); er.className = 'error'; er.setAttribute('aria-live', 'polite'); f.append(er); const save = document.createElement('button'); save.className = 'primary'; save.type = 'submit'; save.textContent = 'حفظ'; f.append(save); o.dialog.append(f); f.onsubmit = e => { e.preventDefault(); if (!un.i.value.trim() || !n.i.value.trim() || (!u && !pw.i.value)) { er.textContent = 'أكمل البيانات المطلوبة.'; return } if (pw.i.value && pw.i.value.length < 8) { er.textContent = 'كلمة المرور ٨ أحرف على الأقل.'; return } mutate('saveUser', { id: u?.id, username: un.i.value.trim(), name: n.i.value.trim(), role: rs.value, active: cb.checked, password: pw.i.value || undefined }, 'تم حفظ المشرف.') } }
+      $('#refresh').onclick = () => { if (!guard()) return; call('bootstrap', {}, data => { closeEditors(); S.data = data; S.user = data.user; render(); msg('تم تحديث البيانات.', true); }); };
+      $('#loginForm').onsubmit = e => {
+        e.preventDefault(); if (S.busy) return;
+        const u = $('#username').value.trim(), p = $('#password').value;
+        if (!u || !p) { $('#loginMsg').textContent = 'أكمل بيانات الدخول.'; return; }
+        $('#loginMsg').textContent = '';
+        call('login', { username: u, password: p }, r => {
+          S.token = r.token; storage.set(S.token); S.user = r.user; S.data = r.data;
+          S.seasonId = season()?.id; $('#password').value = '';
+          $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); render();
+        }, text => $('#loginMsg').textContent = text);
+      }; $('#logout').onclick = () => { if (guard()) call('logout', {}, () => localLogout('')) }; $('#seasonSelect').onchange = () => { if (!guard()) { render(); return } const selected = $('#seasonSelect').value; closeEditors(); S.seasonId = selected; render() }; $$('[data-view]').forEach(b => b.onclick = () => { if (!guard()) return; closeEditors(); S.view = b.dataset.view; S.dirty = false; render() }); window.addEventListener('beforeunload', e => { if (S.dirty) { e.preventDefault(); e.returnValue = '' } }); if (S.token) call('bootstrap', {}, r => { S.user = r.user; S.data = r; S.seasonId = season()?.id; $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); render() }, text => $('#loginMsg').textContent = text);
+    })();
+  </script>
+</body>
+
+</html>
