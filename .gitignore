@@ -6,6 +6,12 @@ coverage/
 # Local tooling state
 .omx/
 .impeccable/hook.cache.json
+.impeccable/config.local.json
+
+# Generated mobile audit evidence (keep reports and verification scripts)
+/audit/mobile/**/*.png
+/audit/mobile/**/measurements.json
+/audit/mobile/**/touch-measurements.json
 
 # Local environment and Apps Script credentials / project binding
 .env

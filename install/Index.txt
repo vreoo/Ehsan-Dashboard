@@ -55,6 +55,8 @@
       cursor: not-allowed
     }
 
+    .profile-table-scroll:focus-visible,
+    .report-table-scroll:focus-visible,
     button:focus-visible,
     input:focus-visible,
     select:focus-visible,
@@ -834,6 +836,98 @@
         max-width: none
       }
     }
+
+    /* Mobile composition keeps desktop tables and layout intact. */
+    .mobile-filter-toggle, .report-scroll-hint { display: none }
+    .meeting-scroll, .report-table-scroll, .profile-table-scroll { display: contents }
+
+    @media screen and (max-width:850px) {
+      .layout { min-height: 0; grid-template-rows: auto auto; align-content: start }
+      .side { align-items: center }
+    }
+
+    @media screen and (max-width:560px) {
+      .top { gap: 8px; padding: 12px }
+      .top > div:first-child { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 12px }
+      .top .brand { font-size: 22px }
+      .top .sub { font-size: 12px }
+      .user { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; width: 100%; gap: 6px }
+      #userName { grid-column: 1/-1; font-size: 12px }
+      .user select { width: 100%; max-width: none }
+      button, select, input:not([type=checkbox]) { min-height: 44px }
+      button { white-space: nowrap; overflow-wrap: normal; min-width: 44px; line-height: 1.5 }
+      .field input, .field select, .field textarea, .toolbar input, .toolbar select {
+        min-height: 48px; padding: 10px 12px; line-height: 1.5;
+      }
+      .field input, .field select, .toolbar input, .toolbar select { height: 3em }
+      .field > span:first-child, .toolbar label { font-size: 14px }
+      .panel > .toolbar:first-child { margin-block: 0 16px }
+      .panel > .subpanel > .head { gap: 12px; margin-block: 0 12px }
+      .side { padding: 4px; gap: 0 }
+      .side button { flex: 1 0 auto; text-align: center; padding-inline: 10px; margin: 0 }
+      .head h1 { font-size: 21px }
+      .panel { padding: 12px }
+      .record-table, .record-table tbody { display: block; width: 100% }
+      .record-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap }
+      .record-table tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 16px; padding-block: 12px; border-bottom: 1px solid var(--line) }
+      .record-table tr:first-child { padding-block-start: 4px }
+      .record-table tr:last-child { border-bottom: 0; padding-block-end: 4px }
+      .record-table td.empty { justify-content: center; align-items: center; padding-block: 24px; font-weight: 400 }
+      .record-table td { display: flex; flex-direction: column; align-items: flex-start; padding: 0; border: 0; min-width: 0; max-width: none; white-space: normal; overflow-wrap: anywhere }
+      .record-table td::before { content: attr(data-label); color: var(--muted); font-size: 12px }
+      .record-table td:first-child, .record-table td:last-child, .record-table td.empty { grid-column: 1/-1 }
+      .record-table td:first-child { font-weight: 600 }
+      .record-table td:first-child::before, .record-table td:last-child::before, .record-table td.empty::before { display: none }
+      .record-table td:last-child { flex-direction: row; flex-wrap: wrap; gap: 8px }
+      .record-table td > button + button { margin: 0 }
+      .record-table .link { white-space: normal; text-align: start; max-width: 100%; overflow-wrap: anywhere }
+
+      .record-table .phone { align-items: flex-end; direction: ltr; unicode-bidi: isolate; white-space: nowrap }
+      .student-records tr { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px }
+      .student-records td:first-child { grid-column: 1/3; justify-content: center }
+      .student-records td:last-child:not(.empty) { grid-column: 3; grid-row: 1; justify-content: flex-end; align-items: center }
+      .student-records td.empty { grid-column: 1/-1 }
+      .profile-table-scroll { display: block; overflow-x: auto; max-width: 100%; overscroll-behavior-inline: contain }
+      .profile-table-scroll table { min-width: 420px }
+      .profile-table-scroll td { overflow-wrap: anywhere }
+      .report-panel { overflow: visible }
+      .report-table-scroll { display: block; overflow-x: auto; overscroll-behavior-inline: contain }
+      .report-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 8px }
+      .report-toolbar > label { min-width: 0 }
+      .report-toolbar > .report-kind { order: 0 }
+      .report-toolbar > .report-search { order: 1 }
+      .mobile-filter-toggle { display: block; grid-column: 1/-1; order: 2; text-align: start }
+      .report-toolbar > .secondary-filter { order: 3 }
+      .report-toolbar.filters-open > * { order: 0 }
+      .report-toolbar:not(.filters-open) > .secondary-filter { display: none }
+      .report-panel table { min-width: 520px }
+      .report-panel td { overflow-wrap: anywhere; min-width: 8ch }
+      .report-panel td:first-child { min-width: 18ch }
+      .report-scroll-hint { display: block; font-size: 12px; color: var(--muted); margin-block: 0 8px }
+      .report-panel th, .report-panel td { max-width: 32ch }
+      .head .actions { max-width: 100% }
+      .head .actions button { white-space: normal; overflow-wrap: anywhere; max-width: 100% }
+      .dialog form > label:not(.field) { display: flex; align-items: center; gap: 8px; min-height: 44px }
+      .dialog input[type=checkbox] { flex-shrink: 0; min-height: 0; width: 20px; height: 20px }
+      .dialog { padding: 16px; max-height: calc(100dvh - 24px) }
+      .overlay { padding: 12px }
+    }
+    @media screen and (max-width:560px), screen and (max-width:850px) and (max-height:500px) {
+      .meeting-editor { display: flex; flex-direction: column; overflow: hidden; height: min(840px, calc(100vh - 24px)); height: min(840px, calc(100dvh - 24px)) }
+      .meeting-editor > .head { flex-shrink: 0; padding-block-end: 10px; margin-block-end: 0 }
+      .meeting-editor form { display: flex; flex-direction: column; min-height: 0; flex: 1 }
+      .meeting-scroll { display: flex; flex-direction: column; overflow-y: auto; min-height: 0; overscroll-behavior: contain; padding: 4px }
+      .meeting-scroll .grid { order: 0 }
+      .meeting-scroll > button { order: 1; align-self: start; margin-block: 0 12px }
+      .meeting-scroll > table { order: 2 }
+      .meeting-scroll > .error, .meeting-scroll > .global-message { order: 3; flex-shrink: 0 }
+      .meeting-scroll td { overflow-wrap: break-word }
+      .meeting-scroll td:first-child { width: 65% }
+      .meeting-scroll select { width: 100%; min-width: 80px; background: var(--p); border: 1px solid var(--control); border-radius: 7px; padding: 4px }
+      .meeting-editor .actions { flex-shrink: 0; margin: 0; padding-block: 12px max(4px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--p) }
+      .meeting-editor > .notice { flex-shrink: 0; margin-block: 4px 0; font-size: 12px; padding: 6px }
+    }
+
   </style>
 </head>
 
@@ -893,9 +987,10 @@
         $('#loginMsg').textContent = message || '';
       }
       function msg(text, ok = false) {
-        const target = $('.dialog') || $('#main'); let p = target.querySelector('.global-message');
+        const target = $('.meeting-scroll') || $('.dialog') || $('#main'); let p = target.querySelector('.global-message');
         if (!p) { p = document.createElement('p'); p.className = 'global-message'; p.setAttribute('aria-live', 'polite'); target.append(p); }
-        p.className = 'global-message ' + (ok ? 'success' : 'error'); p.textContent = text;
+        p.className = 'global-message ' + (ok ? 'success' : 'error'); p.setAttribute('role', ok ? 'status' : 'alert'); p.textContent = text;
+        p.scrollIntoView?.({ block: 'nearest' });
       }
       function call(action, payload, done, fail) {
         if (S.busy) return; setBusy(true);
@@ -929,7 +1024,24 @@
       function time(value) { return value ? new Date(value).toLocaleString('ar-KW', { timeZone: 'Asia/Kuwait', dateStyle: 'short', timeStyle: 'short' }) : '—'; }
 
       function options(arr, value, empty) { const s = document.createElement('select'); if (empty) { const o = document.createElement('option'); o.value = ''; o.textContent = empty; s.append(o) } arr.forEach(x => { const o = document.createElement('option'); o.value = x.value; o.textContent = x.label; o.selected = x.value === value; s.append(o) }); return s } function rowEmpty(n, text) { const tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = n; td.className = 'empty'; td.textContent = text; tr.append(td); return tr } let fieldId = 0;
-      function field(label, value, type = 'text', required = false) { const l = document.createElement('label'); l.className = 'field'; l.append(cell(label)); const i = document.createElement('input'); i.type = type; i.value = value ?? ''; i.required = required; l.append(i); const e = document.createElement('span'); e.className = 'error'; e.id = 'field-error-' + (++fieldId); e.setAttribute('aria-live', 'polite'); i.setAttribute('aria-describedby', e.id); l.append(e); i.oninput = () => S.dirty = true; return { l, i, e } } function cell(t) { const s = document.createElement('span'); s.textContent = t; return s }
+      function field(label, value, type = 'text', required = false, maxLength) { const l = document.createElement('label'); l.className = 'field'; l.append(cell(label)); const i = document.createElement('input'); i.type = type; i.value = value ?? ''; i.required = required; if (maxLength) i.maxLength = maxLength; l.append(i); const e = document.createElement('span'); e.className = 'error'; e.id = 'field-error-' + (++fieldId); e.setAttribute('aria-live', 'polite'); i.setAttribute('aria-describedby', e.id); l.append(e); i.oninput = () => S.dirty = true; return { l, i, e } } function cell(t) { const s = document.createElement('span'); s.textContent = t; return s }
+      function profileTable(table, label) {
+        const region = document.createElement('div'); region.className = 'profile-table-scroll';
+        region.tabIndex = 0; region.setAttribute('role', 'region'); region.setAttribute('aria-label', label); region.append(table);
+        return region;
+      }
+      function mobileRecords(table) {
+        table.classList.add('record-table');
+        table.setAttribute('role', 'table');
+        const headers = [...table.querySelectorAll('th')].map(th => th.textContent);
+        table.querySelectorAll('tr').forEach(row => {
+          row.setAttribute('role', 'row');
+          [...row.children].forEach((cell, index) => {
+            cell.setAttribute('role', cell.tagName === 'TH' ? 'columnheader' : 'cell');
+            if (cell.tagName === 'TD' && !cell.classList.contains('empty')) cell.dataset.label = headers[index] || '';
+          });
+        });
+      }
       function setShell(title, sub) { $('#main').innerHTML = `<div class="head"><div><h1>${esc(title)}</h1><p class="muted">${esc(sub)}</p></div><div id="actions" class="actions"></div></div>`; return $('#actions') }
       function render() {
         if (!S.data) return;
@@ -949,7 +1061,7 @@
       }
 
       const searchKey = value => String(value ?? '').replace(/ی/g, 'ي').replace(/ک/g, 'ك').toLocaleLowerCase('ar-KW');
-      function students() { const a = setShell('الطلاب', 'إدارة الطلاب وملفاتهم'); const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة طالب'; add.onclick = () => studentDialog(); a.append(add); const bar = document.createElement('div'); bar.className = 'toolbar'; const search = document.createElement('input'); search.type = 'search'; search.setAttribute('aria-label', 'ابحث باسم الطالب'); search.placeholder = 'ابحث باسم الطالب'; const gs = options((S.data.groups || []).map(x => ({ value: x.id, label: x.name })), '', 'كل الفئات'); gs.setAttribute('aria-label', 'الفئة'); bar.append(search, gs); $('#main').append(bar); const p = document.createElement('section'); p.className = 'panel'; const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الطالب</th><th>الفئة</th><th>الهاتف</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); const draw = () => { b.replaceChildren(); const q = search.value.trim(); (S.data.students || []).filter(x => (!q || searchKey(x.name).includes(searchKey(q))) && (!gs.value || x.groupId === gs.value)).forEach(s => { const tr = document.createElement('tr'); const n = document.createElement('button'); n.className = 'link'; n.textContent = s.name; n.onclick = () => profile(s.id);[n, cell(gname(s.groupId)), cell(s.phone || '—'), cell(s.active ? 'نشط' : 'موقوف')].forEach(v => { const td = document.createElement('td'); td.append(v); tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => studentDialog(s); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(5, 'لا توجد نتائج')) }; t.append(b); p.append(t); $('#main').append(p); search.oninput = draw; gs.onchange = draw; draw() }
+      function students() { const a = setShell('الطلاب', 'إدارة الطلاب وملفاتهم'); const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة طالب'; add.onclick = () => studentDialog(); a.append(add); const bar = document.createElement('div'); bar.className = 'toolbar'; const search = document.createElement('input'); search.type = 'search'; search.setAttribute('aria-label', 'ابحث باسم الطالب'); search.placeholder = 'ابحث باسم الطالب'; const gs = options((S.data.groups || []).map(x => ({ value: x.id, label: x.name })), '', 'كل الفئات'); gs.setAttribute('aria-label', 'الفئة'); bar.append(search, gs); $('#main').append(bar); const p = document.createElement('section'); p.className = 'panel'; const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الطالب</th><th>الفئة</th><th>الهاتف</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); const draw = () => { b.replaceChildren(); const q = search.value.trim(); (S.data.students || []).filter(x => (!q || searchKey(x.name).includes(searchKey(q))) && (!gs.value || x.groupId === gs.value)).forEach(s => { const tr = document.createElement('tr'); const n = document.createElement('button'); n.className = 'link'; n.textContent = s.name; n.onclick = () => profile(s.id);[n, cell(gname(s.groupId)), cell(s.phone || '—'), cell(s.active ? 'نشط' : 'موقوف')].forEach(v => { const td = document.createElement('td'); td.append(v); tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => studentDialog(s); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(5, 'لا توجد نتائج')); mobileRecords(t); t.classList.add('student-records'); b.querySelectorAll('tr').forEach(row => row.children[2]?.classList.add('phone')) }; t.append(b); p.append(t); $('#main').append(p); search.oninput = draw; gs.onchange = draw; draw() }
 
       function overlay(title) {
         if ($('.overlay')) { if (!guard()) return null; closeEditors(); }
@@ -981,7 +1093,7 @@
         const o = overlay(student ? 'تعديل طالب' : 'إضافة طالب'); if (!o) return;
         const f = document.createElement('form'); f.noValidate = true;
         const grid = document.createElement('div'); grid.className = 'grid two';
-        const name = field('الاسم', student?.name, 'text', true), joined = field('تاريخ الانتساب', student?.joinedOn || today(), 'date', true), phone = field('رقم الهاتف', student?.phone), notes = field('ملاحظات', student?.notes);
+        const name = field('الاسم', student?.name, 'text', true, 120), joined = field('تاريخ الانتساب', student?.joinedOn || today(), 'date', true), phone = field('رقم الهاتف', student?.phone, 'tel', false, 30), notes = field('ملاحظات', student?.notes, 'text', false, 1500);
         const groupLabel = document.createElement('label'); groupLabel.className = 'field'; groupLabel.append(cell('الفئة'));
         const groups = S.data.groups.filter(g => g.active || g.id === student?.groupId), group = options(groups.map(g => ({ value: g.id, label: g.name })), student?.groupId || groups[0]?.id); groupLabel.append(group);
         if (!groups.length) { const note = document.createElement('p'); note.className = 'notice'; note.textContent = 'لا توجد فئة نشطة. اطلب من مدير المركز إضافة فئة أو تفعيلها من الإعدادات.'; f.append(note); group.disabled = true; }
@@ -1005,8 +1117,8 @@
         };
       }
 
-      function profile(id) { const s = S.data.students.find(x => x.id === id), se = season(), sc = S.data.scores?.find(x => x.studentId === id && x.seasonId === se?.id), o = overlay('ملف الطالب'); if (!o) return; const top = document.createElement('div'); top.className = 'head'; top.innerHTML = '<div><h3>' + esc(s?.name || '—') + '</h3><p class="muted">' + esc(gname(s?.groupId)) + ' · ' + esc(se?.name || '') + '</p></div><div><div class="score">' + (sc?.value == null ? '—' : ar(sc.value)) + '</div><p class="muted">النتيجة من ١٠٠</p></div>'; o.dialog.append(top); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>نوع النشاط</th><th>الحضور</th><th>الوزن</th><th>النقاط</th></tr></thead>'; const b = document.createElement('tbody'); (sc?.breakdown || []).forEach(x => { const tr = document.createElement('tr');[x.name, x.total ? ar(x.present) + ' / ' + ar(x.total) : 'لا توجد لقاءات', ar(x.weight) + '٪', x.total ? ar(x.points) : '—'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(4, 'لا توجد نقاط بعد')); t.append(b); o.dialog.append(t); const log = document.createElement('table'); log.innerHTML = '<thead><tr><th>التاريخ</th><th>اللقاء</th><th>الحالة</th><th>المشرف</th></tr></thead>'; const lb = document.createElement('tbody'); (S.data.meetings || []).filter(m => m.seasonId === se?.id && m.roster?.includes(id)).sort((a, b) => b.date.localeCompare(a.date)).forEach(m => { const tr = document.createElement('tr');[d(m.date), m.name + ' · ' + statusMap[m.status], attMap[m.attendance?.[id]], (m.updatedBy || '—') + ' · ' + time(m.updatedAt)].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); lb.append(tr) }); if (!lb.children.length) lb.append(rowEmpty(4, 'لا يوجد سجل حضور')); log.append(lb); const heading = document.createElement('h3'); heading.textContent = 'سجل الحضور'; const note = document.createElement('p'); note.className = 'muted'; note.textContent = 'الغياب بعذر بلا نقاط. الأنواع دون لقاءات معتمدة مستبعدة من وزن النتيجة.'; o.dialog.append(note, heading, log) }
-      function attendance() { const a = setShell('الحضور', 'إنشاء اللقاءات واعتماد الحضور'); const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'لقاء جديد'; add.onclick = () => meetingDialog(); a.append(add); const p = document.createElement('section'); p.className = 'panel'; const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>اللقاء</th><th>التاريخ</th><th>النوع</th><th>الفئة</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.meetings || []).filter(m => m.seasonId === S.seasonId).sort((x, y) => y.date.localeCompare(x.date)).forEach(m => { const tr = document.createElement('tr');[m.name, d(m.date), tname(season(), m.typeId), gname(m.groupId), statusMap[m.status]].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'فتح'; e.onclick = () => meetingDialog(m); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(6, 'لا توجد لقاءات')); t.append(b); p.append(t); $('#main').append(p) }
+      function profile(id) { const s = S.data.students.find(x => x.id === id), se = season(), sc = S.data.scores?.find(x => x.studentId === id && x.seasonId === se?.id), o = overlay('ملف الطالب'); if (!o) return; const top = document.createElement('div'); top.className = 'head'; top.innerHTML = '<div><h3>' + esc(s?.name || '—') + '</h3><p class="muted">' + esc(gname(s?.groupId)) + ' · ' + esc(se?.name || '') + '</p></div><div><div class="score">' + (sc?.value == null ? '—' : ar(sc.value)) + '</div><p class="muted">النتيجة من ١٠٠</p></div>'; o.dialog.append(top); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>نوع النشاط</th><th>الحضور</th><th>الوزن</th><th>النقاط</th></tr></thead>'; const b = document.createElement('tbody'); (sc?.breakdown || []).forEach(x => { const tr = document.createElement('tr');[x.name, x.total ? ar(x.present) + ' / ' + ar(x.total) : 'لا توجد لقاءات', ar(x.weight) + '٪', x.total ? ar(x.points) : '—'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(4, 'لا توجد نقاط بعد')); t.append(b); o.dialog.append(profileTable(t, 'تفاصيل النتيجة')); const log = document.createElement('table'); log.innerHTML = '<thead><tr><th>التاريخ</th><th>اللقاء</th><th>الحالة</th><th>المشرف</th></tr></thead>'; const lb = document.createElement('tbody'); (S.data.meetings || []).filter(m => m.seasonId === se?.id && m.roster?.includes(id)).sort((a, b) => b.date.localeCompare(a.date)).forEach(m => { const tr = document.createElement('tr');[d(m.date), m.name + ' · ' + statusMap[m.status], attMap[m.attendance?.[id]], (m.updatedBy || '—') + ' · ' + time(m.updatedAt)].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); lb.append(tr) }); if (!lb.children.length) lb.append(rowEmpty(4, 'لا يوجد سجل حضور')); log.append(lb); const heading = document.createElement('h3'); heading.textContent = 'سجل الحضور'; const note = document.createElement('p'); note.className = 'muted'; note.textContent = 'الغياب بعذر بلا نقاط. الأنواع دون لقاءات معتمدة مستبعدة من وزن النتيجة.'; o.dialog.append(note, heading, profileTable(log, 'سجل الحضور')) }
+      function attendance() { const a = setShell('الحضور', 'إنشاء اللقاءات واعتماد الحضور'); const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'لقاء جديد'; add.onclick = () => meetingDialog(); a.append(add); const p = document.createElement('section'); p.className = 'panel'; const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>اللقاء</th><th>التاريخ</th><th>النوع</th><th>الفئة</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.meetings || []).filter(m => m.seasonId === S.seasonId).sort((x, y) => y.date.localeCompare(x.date)).forEach(m => { const tr = document.createElement('tr');[m.name, d(m.date), tname(season(), m.typeId), gname(m.groupId), statusMap[m.status]].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'فتح'; e.onclick = () => meetingDialog(m); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(6, 'لا توجد لقاءات')); t.append(b); mobileRecords(t); p.append(t); $('#main').append(p) }
 
       function meetingDialog(meeting) {
         const se = S.data.seasons.find(s => s.id === (meeting?.seasonId || S.seasonId));
@@ -1014,18 +1126,20 @@
         if (!meeting && se.status !== 'active') { msg('فعّل الموسم قبل إنشاء اللقاءات.'); return; }
         const o = overlay(meeting ? 'سجل اللقاء' : 'لقاء جديد'); if (!o) return;
         const readonly = meeting?.status === 'cancelled' || se.status !== 'active', fixed = meeting?.status === 'approved' || readonly;
+        o.dialog.classList.add('meeting-editor');
         const f = document.createElement('form'); f.noValidate = true;
+        const scroll = document.createElement('div'); scroll.className = 'meeting-scroll'; f.append(scroll);
         const grid = document.createElement('div'); grid.className = 'grid';
-        const name = field('اسم اللقاء', meeting?.name, 'text', true), day = field('التاريخ', meeting?.date || today(), 'date', true);
+        const name = field('اسم اللقاء', meeting?.name, 'text', true, 120), day = field('التاريخ', meeting?.date || today(), 'date', true);
         const typeLabel = document.createElement('label'); typeLabel.className = 'field'; typeLabel.append(cell('نوع النشاط'));
         const type = options(se.types.map(t => ({ value: t.id, label: t.name })), meeting?.typeId || se.types[0]?.id); typeLabel.append(type);
         const groupLabel = document.createElement('label'); groupLabel.className = 'field'; groupLabel.append(cell('الفئة'));
         const groups = S.data.groups.filter(g => g.active || g.id === meeting?.groupId), group = options(groups.map(g => ({ value: g.id, label: g.name })), meeting?.groupId || groups[0]?.id); groupLabel.append(group);
-        grid.append(name.l, day.l, typeLabel, groupLabel); f.append(grid);
+        grid.append(name.l, day.l, typeLabel, groupLabel); scroll.append(grid);
         name.i.disabled = readonly; day.i.disabled = type.disabled = group.disabled = fixed;
         let roster = meeting?.roster ? [...meeting.roster] : S.data.students.filter(s => eligible(s, day.i.value, group.value)).map(s => s.id);
         const attendance = { ...(meeting?.attendance || {}) };
-        const table = document.createElement('table'); table.innerHTML = '<thead><tr><th>الطالب</th><th>الحالة</th></tr></thead>'; const body = document.createElement('tbody'); table.append(body); f.append(table);
+        const table = document.createElement('table'); table.innerHTML = '<thead><tr><th>الطالب</th><th>الحالة</th></tr></thead>'; const body = document.createElement('tbody'); table.append(body); scroll.append(table);
         const draw = () => {
           body.replaceChildren(); roster.forEach(id => {
             const student = S.data.students.find(s => s.id === id); if (!student) return;
@@ -1039,17 +1153,17 @@
           Object.keys(attendance).forEach(id => { if (!roster.includes(id)) delete attendance[id]; }); draw(); S.dirty = true;
         };
         group.onchange = rebuild; day.i.onchange = rebuild;
-        const all = document.createElement('button'); all.type = 'button'; all.textContent = 'تحديد الجميع حاضرًا'; all.disabled = readonly; all.onclick = () => { roster.forEach(id => attendance[id] = 'present'); draw(); S.dirty = true; }; f.append(all);
-        const error = document.createElement('p'); error.className = 'error'; error.setAttribute('aria-live', 'polite'); error.setAttribute('role', 'alert'); f.append(error);
+        const all = document.createElement('button'); all.type = 'button'; all.textContent = 'تحديد الجميع حاضرًا'; all.disabled = readonly; all.onclick = () => { roster.forEach(id => attendance[id] = 'present'); draw(); S.dirty = true; }; scroll.append(all);
+        const error = document.createElement('p'); error.className = 'error'; error.setAttribute('aria-live', 'polite'); error.setAttribute('role', 'alert'); scroll.append(error);
         const actions = document.createElement('div'); actions.className = 'actions';
         const button = (text, status, primary) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = text; if (primary) b.className = 'primary'; b.onclick = () => { if (status !== 'cancelled' || confirm('إلغاء اللقاء يستبعده من النقاط ويبقي سجله محفوظًا. هل تريد المتابعة؟')) save(status); }; actions.append(b); };
         if (!readonly) { if (meeting?.status !== 'approved') button('حفظ مسودة', 'draft'); button(meeting?.status === 'approved' ? 'حفظ التعديل' : 'اعتماد الحضور', 'approved', true); if (meeting) button('إلغاء اللقاء', 'cancelled'); }
         f.append(actions); o.dialog.append(f); draw();
         if (fixed) { const note = document.createElement('p'); note.className = 'notice'; note.textContent = readonly ? 'هذا السجل للعرض فقط.' : 'يمكن تعديل الحضور. لتصحيح التاريخ أو الفئة أو النوع ألغِ اللقاء وأنشئ بديلًا.'; o.dialog.append(note); }
         function save(status) {
-          if (!name.i.value.trim() || !day.i.value) { error.textContent = 'اسم اللقاء والتاريخ مطلوبان.'; return; }
-          if (status === 'approved' && day.i.value > today()) { error.textContent = 'لا يمكن اعتماد لقاء مستقبلي.'; return; }
-          if (status === 'approved' && roster.some(id => !attendance[id])) { error.textContent = 'حدد حالة كل طالب قبل الاعتماد.'; return; }
+          if (!name.i.value.trim() || !day.i.value) { error.textContent = 'اسم اللقاء والتاريخ مطلوبان.'; error.scrollIntoView?.({ block: 'nearest' }); return; }
+          if (status === 'approved' && day.i.value > today()) { error.textContent = 'لا يمكن اعتماد لقاء مستقبلي.'; error.scrollIntoView?.({ block: 'nearest' }); return; }
+          if (status === 'approved' && roster.some(id => !attendance[id])) { error.textContent = 'حدد حالة كل طالب قبل الاعتماد.'; error.scrollIntoView?.({ block: 'nearest' }); return; }
           mutate('saveMeeting', { id: meeting?.id, seasonId: se.id, name: name.i.value.trim(), typeId: type.value, groupId: group.value, date: day.i.value, status, attendance: Object.fromEntries(roster.map(id => [id, attendance[id] || ''])), revision: meeting?.revision }, 'تم حفظ اللقاء وتحديث النتائج.');
         }
       }
@@ -1064,10 +1178,19 @@
         const group = options(S.data.groups.map(g => ({ value: g.id, label: g.name })), '', 'كل الفئات'), type = options((season()?.types || []).map(t => ({ value: t.id, label: t.name })), '', 'كل الأنواع'), search = document.createElement('input'); search.type = 'search'; search.placeholder = 'اسم الطالب';
         const from = document.createElement('input'); from.type = 'date'; from.value = season()?.start || ''; const to = document.createElement('input'); to.type = 'date'; to.value = season()?.end || '';
         const label = (text, control) => { const l = document.createElement('label'); l.append(cell(text), control); return l; };
-        toolbar.append(label('التقرير', kind), label('الفئة وقت اللقاء', group), label('نوع النشاط', type), label('الطالب', search), label('من', from), label('إلى', to)); $('#main').append(toolbar);
-        const panel = document.createElement('section'); panel.className = 'panel'; const note = document.createElement('p'); panel.append(note); const table = document.createElement('table'), head = document.createElement('thead'), body = document.createElement('tbody'); table.append(head, body); panel.append(table); $('#main').append(panel);
+        toolbar.classList.add('report-toolbar');
+        const kindLabel = label('التقرير', kind), searchLabel = label('الطالب', search);
+        kindLabel.className = 'report-kind'; searchLabel.className = 'report-search';
+        const secondary = [label('الفئة وقت اللقاء', group), label('نوع النشاط', type), label('من', from), label('إلى', to)];
+        secondary.forEach(item => item.className = 'secondary-filter');
+        const toggle = document.createElement('button'); toggle.type = 'button'; toggle.className = 'mobile-filter-toggle'; toggle.setAttribute('aria-expanded', 'false');
+        toggle.onclick = () => { const open = toolbar.classList.toggle('filters-open'); toggle.setAttribute('aria-expanded', String(open)); };
+        toolbar.append(kindLabel, secondary[0], secondary[1], searchLabel, secondary[2], secondary[3], toggle); $('#main').append(toolbar);
+        const panel = document.createElement('section'); panel.className = 'panel'; panel.classList.add('report-panel'); const note = document.createElement('p'); panel.append(note); const hint = document.createElement('p'); hint.className = 'report-scroll-hint'; hint.textContent = 'مرّر الجدول أفقيًا لعرض بقية الأعمدة'; panel.append(hint); const table = document.createElement('table'), head = document.createElement('thead'), body = document.createElement('tbody'); table.append(head, body); const tableScroll = document.createElement('div'); tableScroll.className = 'report-table-scroll'; tableScroll.tabIndex = 0; tableScroll.setAttribute('role', 'region'); tableScroll.setAttribute('aria-label', 'جدول التقرير'); tableScroll.append(table); panel.append(tableScroll); $('#main').append(panel);
         let output = [];
         function draw() {
+          const filterCount = [group.value, type.value, from.value !== (season()?.start || ''), to.value !== (season()?.end || '')].filter(Boolean).length;
+          toggle.textContent = 'تصفية التقرير' + (filterCount ? ' (' + ar(filterCount) + ')' : '');
           output = []; head.replaceChildren(); body.replaceChildren(); note.className = 'muted'; S.reportKind = kind.value;
           if (from.value && to.value && from.value > to.value) { note.textContent = 'تاريخ البداية يجب أن يسبق النهاية.'; note.className = 'error'; exportButton.disabled = true; print.disabled = true; return; }
           const se = season(), meetings = S.data.meetings.filter(m => m.seasonId === se?.id && m.status === 'approved' && m.date <= today() && (!from.value || m.date >= from.value) && (!to.value || m.date <= to.value) && (!group.value || m.groupId === group.value) && (!type.value || m.typeId === type.value));
@@ -1098,19 +1221,19 @@
       function score(st, se, ms, typeId) { const bs = (se?.types || []).filter(t => !typeId || t.id === typeId).map(t => { const e = ms.filter(m => m.status === 'approved' && m.typeId === t.id && m.roster?.includes(st.id) && m.date <= today()), p = e.filter(m => m.attendance?.[st.id] === 'present').length; return { t, e, p } }).filter(x => x.e.length); if (!bs.length) return '—'; const w = bs.reduce((n, x) => n + x.t.weight, 0); return ar(bs.reduce((n, x) => n + x.p / x.e.length * x.t.weight, 0) / w * 100) }
       function settings() { const a = setShell('الإعدادات', 'المواسم والفئات وحسابات المشرفين'); const p = document.createElement('section'); p.className = 'panel'; const tabs = document.createElement('div'); tabs.className = 'toolbar';[['seasons', 'المواسم'], ['groups', 'الفئات'], ['users', 'المشرفون']].forEach(([k, l]) => { if (k === 'users' && S.user?.role !== 'admin') return; const b = document.createElement('button'); b.textContent = l; b.dataset.setting = k; b.onclick = () => settingsTab(p, k); tabs.append(b) }); p.append(tabs); $('#main').append(p); settingsTab(p, 'seasons'); if (S.user?.role === 'admin' && S.data.databaseUrl) { const link = document.createElement('a'); link.href = S.data.databaseUrl; link.target = '_blank'; link.rel = 'noopener'; link.textContent = 'فتح ملف البيانات'; link.className = 'muted'; p.append(link) } }
       function settingsTab(p, k) { p.querySelectorAll('[data-setting]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.setting === k)));[...p.querySelectorAll('.subpanel')].forEach(x => x.remove()); const box = document.createElement('div'); box.className = 'subpanel'; p.append(box); if (k === 'seasons') seasonPanel(box); if (k === 'groups') groupPanel(box); if (k === 'users') userPanel(box) }
-      function seasonPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>المواسم</h2>'; if (S.user?.role === 'admin') { const b = document.createElement('button'); b.className = 'primary'; b.textContent = 'موسم جديد'; b.onclick = () => seasonDialog(); h.append(b) } box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الموسم</th><th>الفترة</th><th>الحالة</th><th>الإجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.seasons || []).forEach(x => { const tr = document.createElement('tr');[x.name, d(x.start) + ' — ' + d(x.end), statusMap[x.status]].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'); const open = document.createElement('button'); open.textContent = x.status === 'draft' ? 'تعديل' : 'عرض'; open.onclick = () => seasonDialog(x); td.append(open); if (S.user?.role === 'admin' && x.status === 'draft') { const ac = document.createElement('button'); ac.textContent = 'تفعيل'; ac.onclick = () => mutate('activateSeason', { id: x.id }, 'تم تفعيل الموسم.'); td.append(ac) } if (S.user?.role === 'admin' && x.status === 'active') { const re = document.createElement('button'); re.textContent = 'إعادة فتح'; re.onclick = () => { if (confirm('إعادة فتح الموسم تسمح بتعديل الأوزان وإعادة حساب النتائج. هل تريد المتابعة؟')) mutate('reopenSeason', { id: x.id }, 'تمت إعادة فتح الموسم.'); }; td.append(re); const cl = document.createElement('button'); cl.textContent = 'إغلاق'; cl.onclick = () => { if (confirm('إغلاق الموسم يمنع تعديل حضوره حتى يعيد المدير فتحه. هل تريد المتابعة؟')) mutate('closeSeason', { id: x.id }, 'تم إغلاق الموسم.'); }; td.append(cl) } if (S.user?.role === 'admin' && x.status === 'closed') { const re = document.createElement('button'); re.textContent = 'إعادة فتح'; re.onclick = () => { if (confirm('إعادة فتح الموسم تسمح بتعديل الأوزان وإعادة حساب النتائج. هل تريد المتابعة؟')) mutate('reopenSeason', { id: x.id }, 'تمت إعادة فتح الموسم.'); }; td.append(re) } tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(4, 'لا توجد مواسم')); t.append(b); box.append(t) }
+      function seasonPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>المواسم</h2>'; if (S.user?.role === 'admin') { const b = document.createElement('button'); b.className = 'primary'; b.textContent = 'موسم جديد'; b.onclick = () => seasonDialog(); h.append(b) } box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الموسم</th><th>الفترة</th><th>الحالة</th><th>الإجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.seasons || []).forEach(x => { const tr = document.createElement('tr');[x.name, d(x.start) + ' — ' + d(x.end), statusMap[x.status]].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'); const open = document.createElement('button'); open.textContent = x.status === 'draft' ? 'تعديل' : 'عرض'; open.onclick = () => seasonDialog(x); td.append(open); if (S.user?.role === 'admin' && x.status === 'draft') { const ac = document.createElement('button'); ac.textContent = 'تفعيل'; ac.onclick = () => mutate('activateSeason', { id: x.id }, 'تم تفعيل الموسم.'); td.append(ac) } if (S.user?.role === 'admin' && x.status === 'active') { const re = document.createElement('button'); re.textContent = 'إعادة فتح'; re.onclick = () => { if (confirm('إعادة فتح الموسم تسمح بتعديل الأوزان وإعادة حساب النتائج. هل تريد المتابعة؟')) mutate('reopenSeason', { id: x.id }, 'تمت إعادة فتح الموسم.'); }; td.append(re); const cl = document.createElement('button'); cl.textContent = 'إغلاق'; cl.onclick = () => { if (confirm('إغلاق الموسم يمنع تعديل حضوره حتى يعيد المدير فتحه. هل تريد المتابعة؟')) mutate('closeSeason', { id: x.id }, 'تم إغلاق الموسم.'); }; td.append(cl) } if (S.user?.role === 'admin' && x.status === 'closed') { const re = document.createElement('button'); re.textContent = 'إعادة فتح'; re.onclick = () => { if (confirm('إعادة فتح الموسم تسمح بتعديل الأوزان وإعادة حساب النتائج. هل تريد المتابعة؟')) mutate('reopenSeason', { id: x.id }, 'تمت إعادة فتح الموسم.'); }; td.append(re) } tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(4, 'لا توجد مواسم')); t.append(b); mobileRecords(t); box.append(t) }
 
       function seasonDialog(current) {
         if (!current && S.user.role !== 'admin') { msg('إعداد المواسم لمدير المركز فقط.'); return; }
         const editable = S.user.role === 'admin' && (!current || current.status === 'draft'), o = overlay(current ? (editable ? 'تعديل الموسم' : 'تفاصيل الموسم') : 'إنشاء موسم'); if (!o) return;
         const form = document.createElement('form'); form.noValidate = true;
-        const grid = document.createElement('div'); grid.className = 'grid'; const name = field('اسم الموسم', current?.name, 'text', true), start = field('البداية', current?.start, 'date', true), end = field('النهاية', current?.end, 'date', true); grid.append(name.l, start.l, end.l); form.append(grid);[name.i, start.i, end.i].forEach(input => input.disabled = !editable);
+        const grid = document.createElement('div'); grid.className = 'grid'; const name = field('اسم الموسم', current?.name, 'text', true, 100), start = field('البداية', current?.start, 'date', true), end = field('النهاية', current?.end, 'date', true); grid.append(name.l, start.l, end.l); form.append(grid);[name.i, start.i, end.i].forEach(input => input.disabled = !editable);
         if (!editable) { const notice = document.createElement('p'); notice.className = 'notice'; notice.textContent = 'للعرض فقط. يستطيع المدير إعادة فتح الموسم للإعداد لتعديل الأوزان ثم تفعيله مجددًا.'; form.append(notice); }
         let list = (current?.types || []).map(type => ({ ...type })); const container = document.createElement('div'), total = document.createElement('p'); total.className = 'muted';
         const sum = () => total.textContent = 'المجموع: ' + ar(list.reduce((sum, type) => sum + (Number(type.weight) || 0), 0)) + ' / ١٠٠';
         function draw() {
           container.replaceChildren(); list.forEach((type, index) => {
-            const row = document.createElement('div'); row.className = 'type'; const n = field('نوع النشاط', type.name), w = field('الوزن', type.weight, 'number'); w.i.min = '0.1'; w.i.max = '100'; w.i.step = '0.1'; n.i.disabled = w.i.disabled = !editable;
+            const row = document.createElement('div'); row.className = 'type'; const n = field('نوع النشاط', type.name, 'text', false, 70), w = field('الوزن', type.weight, 'number'); w.i.min = '0.1'; w.i.max = '100'; w.i.step = '0.1'; n.i.disabled = w.i.disabled = !editable;
             n.i.oninput = () => { type.name = n.i.value; S.dirty = true; }; w.i.oninput = () => { type.weight = Number(w.i.value); sum(); S.dirty = true; }; row.append(n.l, w.l);
             if (editable) { const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'حذف'; remove.disabled = S.data.meetings.some(m => m.seasonId === current?.id && m.typeId === type.id); remove.onclick = () => { list.splice(index, 1); S.dirty = true; draw(); }; row.append(remove); }
             container.append(row);
@@ -1135,8 +1258,8 @@
         };
       }
 
-      function groupPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>الفئات</h2>'; const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة فئة'; add.onclick = () => groupDialog(); if (S.user.role === 'admin') h.append(add); box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الفئة</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.groups || []).forEach(g => { const tr = document.createElement('tr');[g.name, g.active ? 'نشطة' : 'موقوفة'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => groupDialog(g); if (S.user.role === 'admin') td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(3, 'لا توجد فئات')); t.append(b); box.append(t) } function groupDialog(g) { if (S.user.role !== 'admin') return; const o = overlay(g ? 'تعديل فئة' : 'إضافة فئة'); if (!o) return; const f = document.createElement('form'), n = field('اسم الفئة', g?.name, 'text', true), lab = document.createElement('label'), cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = g?.active !== false; lab.append(cb, cell('فئة نشطة')); f.append(n.l, lab); const er = document.createElement('p'); er.className = 'error'; er.setAttribute('aria-live', 'polite'); f.append(er); const save = document.createElement('button'); save.className = 'primary'; save.textContent = 'حفظ'; save.type = 'submit'; f.append(save); o.dialog.append(f); f.onsubmit = e => { e.preventDefault(); if (!n.i.value.trim()) { er.textContent = 'اسم الفئة مطلوب.'; return } mutate('saveGroup', { id: g?.id, name: n.i.value.trim(), active: cb.checked }, 'تم حفظ الفئة.') } }
-      function userPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>المشرفون</h2>'; const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة مشرف'; add.onclick = () => userDialog(); h.append(add); box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الاسم</th><th>المستخدم</th><th>الصلاحية</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.users || []).forEach(u => { const tr = document.createElement('tr');[u.name, u.username, u.role === 'admin' ? 'مدير' : 'مشرف', u.active ? 'نشط' : 'موقوف'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => userDialog(u); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(5, 'لا يوجد مشرفون')); t.append(b); box.append(t) } function userDialog(u) { if (S.user.role !== 'admin') return; const o = overlay(u ? 'تعديل مشرف' : 'إضافة مشرف'); if (!o) return; const f = document.createElement('form'), un = field('اسم المستخدم', u?.username, 'text', true), n = field('الاسم', u?.name, 'text', true), pw = field('كلمة المرور', '', 'password', !u), role = document.createElement('label'), rs = options([{ value: 'staff', label: 'مشرف' }, { value: 'admin', label: 'مدير' }], u?.role || 'staff'); role.className = 'field'; role.append(cell('الصلاحية'), rs); const active = document.createElement('label'), cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = u?.active !== false; active.append(cb, cell('حساب نشط')); f.append(un.l, n.l, pw.l, role, active); const er = document.createElement('p'); er.className = 'error'; er.setAttribute('aria-live', 'polite'); f.append(er); const save = document.createElement('button'); save.className = 'primary'; save.type = 'submit'; save.textContent = 'حفظ'; f.append(save); o.dialog.append(f); f.onsubmit = e => { e.preventDefault(); if (!un.i.value.trim() || !n.i.value.trim() || (!u && !pw.i.value)) { er.textContent = 'أكمل البيانات المطلوبة.'; return } if (pw.i.value && pw.i.value.length < 8) { er.textContent = 'كلمة المرور ٨ أحرف على الأقل.'; return } mutate('saveUser', { id: u?.id, username: un.i.value.trim(), name: n.i.value.trim(), role: rs.value, active: cb.checked, password: pw.i.value || undefined }, 'تم حفظ المشرف.') } }
+      function groupPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>الفئات</h2>'; const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة فئة'; add.onclick = () => groupDialog(); if (S.user.role === 'admin') h.append(add); box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الفئة</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.groups || []).forEach(g => { const tr = document.createElement('tr');[g.name, g.active ? 'نشطة' : 'موقوفة'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => groupDialog(g); if (S.user.role === 'admin') td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(3, 'لا توجد فئات')); t.append(b); mobileRecords(t); box.append(t) } function groupDialog(g) { if (S.user.role !== 'admin') return; const o = overlay(g ? 'تعديل فئة' : 'إضافة فئة'); if (!o) return; const f = document.createElement('form'), n = field('اسم الفئة', g?.name, 'text', true, 60), lab = document.createElement('label'), cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = g?.active !== false; lab.append(cb, cell('فئة نشطة')); f.append(n.l, lab); const er = document.createElement('p'); er.className = 'error'; er.setAttribute('aria-live', 'polite'); f.append(er); const save = document.createElement('button'); save.className = 'primary'; save.textContent = 'حفظ'; save.type = 'submit'; f.append(save); o.dialog.append(f); f.onsubmit = e => { e.preventDefault(); if (!n.i.value.trim()) { er.textContent = 'اسم الفئة مطلوب.'; return } mutate('saveGroup', { id: g?.id, name: n.i.value.trim(), active: cb.checked }, 'تم حفظ الفئة.') } }
+      function userPanel(box) { const h = document.createElement('div'); h.className = 'head'; h.innerHTML = '<h2>المشرفون</h2>'; const add = document.createElement('button'); add.className = 'primary'; add.textContent = 'إضافة مشرف'; add.onclick = () => userDialog(); h.append(add); box.append(h); const t = document.createElement('table'); t.innerHTML = '<thead><tr><th>الاسم</th><th>المستخدم</th><th>الصلاحية</th><th>الحالة</th><th>إجراء</th></tr></thead>'; const b = document.createElement('tbody'); (S.data.users || []).forEach(u => { const tr = document.createElement('tr');[u.name, u.username, u.role === 'admin' ? 'مدير' : 'مشرف', u.active ? 'نشط' : 'موقوف'].forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td) }); const td = document.createElement('td'), e = document.createElement('button'); e.textContent = 'تعديل'; e.onclick = () => userDialog(u); td.append(e); tr.append(td); b.append(tr) }); if (!b.children.length) b.append(rowEmpty(5, 'لا يوجد مشرفون')); t.append(b); mobileRecords(t); box.append(t) } function userDialog(u) { if (S.user.role !== 'admin') return; const o = overlay(u ? 'تعديل مشرف' : 'إضافة مشرف'); if (!o) return; const f = document.createElement('form'), un = field('اسم المستخدم', u?.username, 'text', true, 40), n = field('الاسم', u?.name, 'text', true, 100), pw = field('كلمة المرور', '', 'password', !u, 128), role = document.createElement('label'), rs = options([{ value: 'staff', label: 'مشرف' }, { value: 'admin', label: 'مدير' }], u?.role || 'staff'); role.className = 'field'; role.append(cell('الصلاحية'), rs); const active = document.createElement('label'), cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = u?.active !== false; active.append(cb, cell('حساب نشط')); f.append(un.l, n.l, pw.l, role, active); const er = document.createElement('p'); er.className = 'error'; er.setAttribute('aria-live', 'polite'); f.append(er); const save = document.createElement('button'); save.className = 'primary'; save.type = 'submit'; save.textContent = 'حفظ'; f.append(save); o.dialog.append(f); f.onsubmit = e => { e.preventDefault(); if (!un.i.value.trim() || !n.i.value.trim() || (!u && !pw.i.value)) { er.textContent = 'أكمل البيانات المطلوبة.'; return } if (pw.i.value && pw.i.value.length < 8) { er.textContent = 'كلمة المرور ٨ أحرف على الأقل.'; return } mutate('saveUser', { id: u?.id, username: un.i.value.trim(), name: n.i.value.trim(), role: rs.value, active: cb.checked, password: pw.i.value || undefined }, 'تم حفظ المشرف.') } }
       $('#refresh').onclick = () => { if (!guard()) return; call('bootstrap', {}, data => { closeEditors(); S.data = data; S.user = data.user; render(); msg('تم تحديث البيانات.', true); }); };
       $('#loginForm').onsubmit = e => {
         e.preventDefault(); if (S.busy) return;

@@ -300,3 +300,22 @@ test('long multilingual names and markup remain plain table content', () => {
   assert(body.querySelector('tbody').textContent.includes(name));
   assert.equal(body.querySelector('tbody').querySelector('img'), null);
 });
+
+test('attendance request errors stay in the scrolling content and preserve corrections for retry', () => {
+  const { ui, body, chain, calls } = environment({ defer: true });
+  ui.meetingDialog({ id: 'm', seasonId: 'season', name: 'لقاء', date: '2026-11-07', typeId: 'q', groupId: 'g1', status: 'approved', roster: ['s1'], attendance: { s1: 'present' }, revision: 2 });
+  const dialog = body.querySelector('.dialog');
+  const status = dialog.querySelectorAll('select').at(-1);
+  status.value = 'excused'; status.onchange();
+  const save = dialog.querySelectorAll('button').find(button => button.textContent === 'حفظ التعديل');
+  save.onclick();
+  chain.failure(new Error('تعذر الحفظ. '.repeat(80)));
+  const message = dialog.querySelector('.meeting-scroll').querySelector('.global-message');
+  assert(message.textContent.includes('تعذر الحفظ'));
+  assert.equal(message.getAttribute('role'), 'alert');
+  assert.equal(status.value, 'excused');
+  assert.equal(save.disabled, false);
+  save.onclick();
+  assert.equal(calls.length, 2);
+  assert.equal(calls.at(-1).payload.attendance.s1, 'excused');
+});
